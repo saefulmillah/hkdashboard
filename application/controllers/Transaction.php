@@ -8,6 +8,7 @@ class Transaction extends CI_Controller
 	{
 		// layout
 		$layout = array('header' => $this->load->view('layout/_header', '', TRUE),
+						'style'  => $this->load->view('transaction/comparison/style.php', '', TRUE),
 						'menu' => $this->load->view('layout/_menu', '', TRUE),
 						'index'  => $this->load->view('transaction/comparison/index.php', '', TRUE),
 						'js' => $this->load->view('transaction/comparison/js.php', '', TRUE), 

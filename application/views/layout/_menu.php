@@ -7,7 +7,6 @@
   </a>
 </nav>
 <div id="wrapper" class="toggled">
-
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">

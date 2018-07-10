@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>[pagetitle] - Hutama Karya Toll Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet">

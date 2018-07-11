@@ -30,9 +30,15 @@ class Transaction extends CI_Controller
 	{
 		// layout
 		// echo $tampil
-		$this->load->model('menu_model', 'menu');
+		$this->load->model('menus_model', 'menu');
 
-		$data['menu'] = $this->menu->category_menu();
+		// $data['menu'] = $this->menu->category_menu();
+
+		$data = array(
+			'title'		=> 'Master > CY > Gateincdp', 
+			'multilevel'=> $this->menu->get_menu_for_level($induk = 0)
+
+		);
 
 		$layout = array('header' => $this->load->view('layout/_header', '', TRUE),
 						'style'  => $this->load->view('transaction/comparison/style.php', '', TRUE),

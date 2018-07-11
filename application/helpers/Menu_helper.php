@@ -1,32 +1,25 @@
 <?php 
 $CI = NULL;
-function get_menu($data, $parent = 0) {
-	$CI =& get_instance();
-
-	static $i = 1;
-	$tab = str_repeat("\t\t", $i);
-	if (isset($data[$parent])) {
-		$html = "\n$tab<ul>";
-		$i++;
-		foreach ($data[$parent] as $v) {
-			$child = get_menu($data, $v->id);
-			$html .= "\n\t$tab<li>";
-			$html .= '<a href="'.$v->url.'">'.$v->title.'</a>';
-			if ($child) {
-				$i--;
-				$html .= $child;
-				$html .= "\n\t$tab";
-			}
-			$html .= '</li>';
-		}
-		$html .= "\n$tab</ul>";
-		return $html;
-	} else {
-		return false;
-	}
-	
+function print_recursive_list($data)
+{
+    $str = "";
+    $icon ="";
+    foreach($data as $list)
+    {
+        $subchild = print_recursive_list($list['child']);
+        if (empty($subchild) != 1) {
+            $icon = '<span class="glyphicon glyphicon-chevron-right" style="float:right;"></span>';
+        } else {
+            $icon = '';
+        }
+        $str .= '<li class="nav-item"><a class="nav-link py-0" href="'.site_url().'/'.$list['menu_url'].'">'.trim($list['menu_title']).' '.$icon.'</a>';
+        
+        // if($subchild != '') {
+        //     // $str .= '<ul class="dropdown-menu">';
+        //     $str .= '<ul class="flex-column pl-2 nav">'.trim($subchild).'</ul>';
+        //     // $str .= '</ul>';
+        // }
+        $str .= "</li>";
+    }
+    return $str;
 }
-
-
- 
-// $menu = get_menu($data);

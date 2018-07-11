@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url('assets/css/bootstrap.css')?>" rel="stylesheet">
+    <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?=base_url('assets/css/simple-sidebar.css')?>" rel="stylesheet">

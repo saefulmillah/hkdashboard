@@ -12,6 +12,17 @@
     &nbsp;&nbsp;&nbsp;
     <span class="navbar-brand mb-0 h1">TOL MONITORING DASHBOARD</span>
   </a>
+  <div class="dropdown">
+  <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Hi, Administrator
+  </button>
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <div role="separator" class="dropdown-divider"></div>
+    <a class="dropdown-item" href="<?=site_url('auth/logout')?>">Logout</a>
+  </div>
+</div>
 </nav>
 <div id="wrapper" class="toggled">
         <!-- Sidebar -->
@@ -23,44 +34,19 @@
                     </a>
                 </li>
                 <ul class="nav flex-column flex-nowrap">
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#submenu1" data-toggle="collapse" data-target="#submenu1">Reports</a>
-                        <div class="collapse" id="submenu1" aria-expanded="false">
+                    <?=$menu?>
+               <!-- <li class="nav-item">
+                        <a class="nav-link collapsed" href="#submenu1" data-toggle="collapse" data-target="#submenu1">Transaksi</a>
+                        <div class="collapse" id="submenu1">
                             <ul class="flex-column pl-2 nav">
                                 <li class="nav-item"><a class="nav-link py-0" href="#">Orders</a></li>
-                                <li class="nav-item">
-                                    <a class="nav-link collapsed py-1" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1">Customers</a>
-                                    <div class="collapse" id="submenu1sub1" aria-expanded="false">
-                                        <ul class="flex-column nav pl-4">
-                                            <li class="nav-item">
-                                                <a class="nav-link p-1" href="#">
-                                                    <i class="fa fa-fw fa-clock-o"></i> Daily
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link p-1" href="#">
-                                                    <i class="fa fa-fw fa-dashboard"></i> Dashboard
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link p-1" href="#">
-                                                    <i class="fa fa-fw fa-bar-chart"></i> Charts
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link p-1" href="#">
-                                                    <i class="fa fa-fw fa-compass"></i> Areas
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Export</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Export</a></li> -->
                 </ul>
             </ul>
         </div>
+        
         <!-- /#sidebar-wrapper

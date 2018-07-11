@@ -7,6 +7,7 @@ class Overview extends CI_Controller {
 	{
 		// layout
 		$layout = array('header' => $this->load->view('layout/_header', '', TRUE),
+						'style'  => $this->load->view('overview/style.php', '', TRUE),
 						'menu' => $this->load->view('layout/_menu', '', TRUE),
 						'index'  => $this->load->view('overview/index.php', '', TRUE),
 						'js' => $this->load->view('overview/js.php', '', TRUE), 

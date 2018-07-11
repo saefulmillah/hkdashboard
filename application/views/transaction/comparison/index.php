@@ -2,6 +2,7 @@
 	<!-- Page Content -->
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
+	  	<li class="breadcrumb-item"><a href="#menu-toggle" class="btn btn-sm btn-secondary" id="menu-toggle">&raquo;</a></li>
 	    <li class="breadcrumb-item active" aria-current="page">Grafik Perbandingan</li>
 	  </ol>
 	</nav>
@@ -28,7 +29,6 @@
 			    </div>
     		</div>		
     	</div>
-        <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
     </div>
 </div>
 <!-- /#page-content-wrapper -->

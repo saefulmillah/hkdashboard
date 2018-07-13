@@ -3,21 +3,17 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
-
-body {
-  overflow-x: hidden;
-}
-
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  font-size: 0.9rem;
 }
 
 #wrapper.toggled {
-  padding-left: 250px;
+  padding-left: 200px;
 }
 
 #sidebar-wrapper {
@@ -103,13 +99,13 @@ body {
     padding-left: 0;
   }
   #wrapper.toggled {
-    padding-left: 250px;
+    padding-left: 200px;
   }
   #sidebar-wrapper {
     width: 0;
   }
   #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 200px;
   }
   #page-content-wrapper {
     padding: 20px;

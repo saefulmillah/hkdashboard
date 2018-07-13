@@ -7,7 +7,8 @@ class Transaction extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
-		$arrGroups = array('admin','StaffOps', 'VMSOps');
+		$this->load->model('menus_model', 'menu');
+		$arrGroups = array('admin','StaffOps');
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
@@ -28,19 +29,16 @@ class Transaction extends CI_Controller
 	
 	public function index()
 	{
+
+		// die(usersInfo('first_name'));
 		// layout
-		// echo $tampil
-		$this->load->model('menus_model', 'menu');
-
-		// $data['menu'] = $this->menu->category_menu();
-
 		$data = array(
-			'title'		=> 'Master > CY > Gateincdp', 
-			'multilevel'=> $this->menu->get_menu_for_level($induk = 0)
-
+			'title'		=> 'Transaction', 
+			'multilevel'=> $this->menu->get_menu_for_level($parent=0),
+			'breadcrumb' => 'Transaksi > Comparison'
 		);
 
-		$layout = array('header' => $this->load->view('layout/_header', '', TRUE),
+		$layout = array('header' => $this->load->view('layout/_header',  $data, TRUE),
 						'style'  => $this->load->view('transaction/comparison/style.php', '', TRUE),
 						'menu' => $this->load->view('layout/_menu', $data, TRUE),
 						'index'  => $this->load->view('transaction/comparison/index.php', '', TRUE),
@@ -49,10 +47,5 @@ class Transaction extends CI_Controller
 						);
 
 		$this->load->view('layout/_main', $layout);
-	}
-
-	public function antam()
-	{
-		echo "asdasd";
 	}
 }

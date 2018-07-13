@@ -1,9 +1,12 @@
 <?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transaction extends CI_Controller
+/**
+ * 
+ */
+class Comparison extends CI_Controller
 {
-	public function __construct()
+	
+	function __construct()
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
@@ -26,26 +29,34 @@ class Transaction extends CI_Controller
 			return show_error('You must be a part of '.$groups.' to view this page');
 		}
 	}
-	
+
 	public function index()
 	{
-
-		// die(usersInfo('first_name'));
 		// layout
 		$data = array(
-			'title'		=> 'Transaction', 
-			'multilevel'=> $this->menu->get_menu_for_level($parent=0),
+			'title' => 'Transaction', 
+			'multilevel' => $this->menu->get_menu_for_level($parent=0),
 			'breadcrumb' => 'Transaksi > Comparison'
 		);
 
 		$layout = array('header' => $this->load->view('layout/_header',  $data, TRUE),
-						'style'  => $this->load->view('transaction/comparison/style.php', '', TRUE),
+						'style'  => $this->load->view('transaction/comparison/style', '', TRUE),
 						'menu' => $this->load->view('layout/_menu', $data, TRUE),
-						'index'  => $this->load->view('transaction/comparison/index.php', '', TRUE),
-						'js' => $this->load->view('transaction/comparison/js.php', '', TRUE), 
+						'index'  => $this->load->view('transaction/comparison/index', '', TRUE),
+						'js' => $this->load->view('transaction/comparison/js', '', TRUE), 
 						'footer' => $this->load->view('layout/_footer', '', TRUE),
 						);
 
 		$this->load->view('layout/_main', $layout);
+	}
+
+	public function getDataGroups()
+	{
+		$sql = "SELECT id, name FROM ion_groups";
+
+		$query = $this->db->query($sql)->result_array();
+
+		echo json_encode($query);
+
 	}
 }

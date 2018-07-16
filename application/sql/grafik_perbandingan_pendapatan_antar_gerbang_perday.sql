@@ -1,0 +1,15 @@
+SELECT 
+	SUM(Rupiah) AS total_rupiah,
+	Gerbang
+FROM
+lalin
+WHERE waktu >= 
+		(
+			SELECT 
+			CASE 
+			  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
+			  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
+			  END start_time
+		) 
+GROUP BY Gerbang
+ORDER BY Gerbang

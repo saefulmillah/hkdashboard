@@ -50,13 +50,165 @@ class Comparison extends CI_Controller
 		$this->load->view('layout/_main', $layout);
 	}
 
-	public function getDataGroups()
+	public function getDataLalinAntarGerbang()
 	{
-		$sql = "SELECT id, name FROM ion_groups";
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "SELECT 
+					COUNT(1) AS total_lalin,
+					Gerbang
+				FROM
+				lalin
+				WHERE waktu >= 
+						(
+							SELECT 
+							CASE 
+							  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
+							  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
+							  END start_time
+						) 
+				GROUP BY Gerbang
+				ORDER BY Gerbang";
 
-		$query = $this->db->query($sql)->result_array();
+		$query = $dbATP->query($sql)->result_array();
 
+		$data = array(
+			'series' => $query,
+			);
 		echo json_encode($query);
 
+	}
+
+	public function getDataPendapatanAntarGerbang()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "SELECT 
+					SUM(Rupiah) AS total_rupiah,
+					Gerbang
+				FROM
+				lalin
+				WHERE waktu >= 
+						(
+							SELECT 
+							CASE 
+							  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
+							  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
+							  END start_time
+						) 
+				GROUP BY Gerbang
+				ORDER BY Gerbang";
+
+		$query = $dbATP->query($sql)->result_array();
+
+		$data = array(
+			'series' => $query,
+			);
+		echo json_encode($query);
+
+	}
+
+	public function getComparisonMethodPayment()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "SELECT 
+				SUM(CASE WHEN metoda = 'Tunai/Umum' THEN rupiah ELSE 0 END) tunai,
+				SUM(CASE WHEN metoda <> 'Tunai/Umum' THEN rupiah ELSE 0 END) non_tunai
+				FROM lalin WHERE waktu >= 
+					(
+						SELECT 
+						CASE 
+						  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
+						  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
+						  END start_time
+					) ";
+
+		$query = $dbATP->query($sql)->result_array();
+
+		$data = array(
+			'series' => $query,
+			);
+		echo json_encode($query);
+
+	}
+
+	public function getNotranALRperGerbang()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "SELECT * FROM
+				    (
+				    	SELECT nogerbang, gerbang,  
+				            SUM(CASE WHEN metoda = 'ALR' THEN 1 ELSE 0 END) sum_alr,
+				            SUM(CASE WHEN metoda = 'LSB' THEN 1 ELSE 0 END) sum_lsb
+				        FROM lalin WHERE waktu >= 
+				    	(
+				    		SELECT 
+				    		CASE 
+				    		  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
+				    		  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
+				    		  END start_time
+				    	) 
+				    	GROUP BY nogerbang, gerbang
+				        ORDER BY gerbang
+				    ) x3";
+
+		$query = $dbATP->query($sql)->result_array();
+
+		$data = array(
+			'series' => $query,
+			);
+		echo json_encode($query);
+	}
+
+	public function getNotranLSBperGerbang()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "SELECT * FROM
+				    (
+				    	SELECT nogerbang, gerbang,  
+				            SUM(CASE WHEN metoda = 'LSB' THEN 1 ELSE 0 END) sum_lsb
+				        FROM lalin WHERE waktu >= 
+				    	(
+				    		SELECT 
+				    		CASE 
+				    		  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
+				    		  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
+				    		  END start_time
+				    	) 
+				    	GROUP BY nogerbang, gerbang
+				        ORDER BY gerbang
+				    ) x3";
+
+		$query = $dbATP->query($sql)->result_array();
+
+		$data = array(
+			'series' => $query,
+			);
+		echo json_encode($query);
+	}
+
+	public function getLalinPerGolongan()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "SELECT 
+					COUNT(id) AS total_lalin,
+					Gerbang
+				FROM
+				lalin
+				WHERE waktu >= 
+						(
+							SELECT 
+							CASE 
+							  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
+							  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
+							  END start_time
+						) 
+				GROUP BY Gerbang
+				ORDER BY Gerbang";
+
+		$query = $dbATP->query($sql)->result_array();
+
+		$data = array(
+			'series' => $query,
+			);
+		echo json_encode($query);
 	}
 }

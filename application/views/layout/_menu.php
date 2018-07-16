@@ -75,7 +75,7 @@
           <a class="navbar-brand" href="#">
             <img src="<?=base_url('assets/images/hk_logo.png')?>" height="40" class="d-inline-block align-top" alt="">
             &nbsp;&nbsp;&nbsp;
-            <span class="navbar-brand mb-0 h1">TOL MONITORING DASHBOARD</span>
+            <span class="navbar-brand mb-0 h1">TOL MONITORING DASHBOARD (ATP)</span>
           </a>
           <div class="dropdown">
           <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

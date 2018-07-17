@@ -119,7 +119,7 @@ class Comparison extends CI_Controller
 						  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
 						  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
 						  END start_time
-					) ";
+					)";
 
 		$query = $dbATP->query($sql)->result_array();
 
@@ -188,12 +188,8 @@ class Comparison extends CI_Controller
 	public function getLalinPerGolongan()
 	{
 		$dbATP = $this->load->database('atp', TRUE);
-		$sql = "SELECT 
-					COUNT(id) AS total_lalin,
-					Gerbang
-				FROM
-				lalin
-				WHERE waktu >= 
+		$sql = "	SELECT CONCAT('Golongan ',golongan) AS golongan, SUM(1) lalin
+						FROM lalin WHERE waktu >= 
 						(
 							SELECT 
 							CASE 
@@ -201,8 +197,9 @@ class Comparison extends CI_Controller
 							  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
 							  END start_time
 						) 
-				GROUP BY Gerbang
-				ORDER BY Gerbang";
+					    GROUP BY golongan
+
+				    ORDER BY golongan";
 
 		$query = $dbATP->query($sql)->result_array();
 

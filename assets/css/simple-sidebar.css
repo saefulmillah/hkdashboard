@@ -79,6 +79,12 @@
   text-decoration: none;
 }
 
+.active {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .sidebar-nav>.sidebar-brand {
   height: 65px;
   font-size: 18px;

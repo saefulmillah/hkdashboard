@@ -97,7 +97,8 @@ var handle_comparisonMethodPayment = function () {
     $.getJSON(url, function(data) {
         // Populate series
         for (i = 0; i < data.length; i++){
-            processed_json.push([parseInt(data[i].tunai), parseInt(data[i].non_tunai)]);
+            processed_json.push(['Non-Tunai', parseInt(data[i].non_tunai)]);
+            processed_json.push(['Tunai', parseInt(data[i].tunai)]);
         }
      
         // draw chart
@@ -215,6 +216,15 @@ var handle_NoTranLSBantarGerbang = function () {
                 colorByPoint: true,
                 data: processed_json
             }]
+        }, function(chart) { // on complete
+
+            chart.renderer.text('No Data Available', 100, 160)
+                .css({
+                    color: '#4572A7',
+                    fontSize: '1rem'
+                })
+                .add();
+
         }); 
     });
 }
@@ -226,7 +236,7 @@ var handle_LalinAntarGolongan = function () {
     $.getJSON(url, function(data) {
         // Populate series
         for (i = 0; i < data.length; i++){
-            processed_json.push([data[i].Gerbang, parseInt(data[i].total_lalin)]);
+            processed_json.push([data[i].golongan, parseInt(data[i].lalin)]);
         }
      
         // draw chart

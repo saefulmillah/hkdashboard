@@ -2,8 +2,8 @@
 <script type="text/javascript">
  
 var table;
-var handle_grafik24Jam = function () {
-    var url = "<?=site_url('transaction/Grafik24Jam/getData24Jam')?>";
+var handle_grafikTahunan = function () {
+    var url = "<?=site_url('transaction/GrafikTahunan/getDataGrafikTahunan')?>";
     // Build the chart
     var timestamp_json = new Array();
     var cashTraffic_json = new Array();   
@@ -25,13 +25,13 @@ var handle_grafik24Jam = function () {
                     }
                  
                     // draw chart
-                    $('#Grafik24Jam').highcharts({
+                    $('#GrafikTahunan').highcharts({
                         chart: {
                             zoomType: 'xy'
                         },
                         credits:{enabled:false},
                         title: {
-                            text: 'Lalin dan Pendapatan dalam 24 Jam Terakhir'
+                            text: 'Lalin dan Pendapatan Tahunan'
                         },
                         xAxis: [{
                             categories: timestamp_json, // FILL THIS
@@ -133,7 +133,7 @@ var handle_grafik24Jam = function () {
 }
  
 $(document).ready(function() {
-    handle_grafik24Jam();
+    handle_grafikTahunan();
     /*using interval redraw 3 sec*/
     // setInterval(function() {
     //    handle_lalinAntarGerbang();

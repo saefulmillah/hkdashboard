@@ -13,7 +13,7 @@ function print_recursive_list($data)
         } else {
             $icon = '';
         }
-        $str .= '<li class="nav-item"><a class="nav-link py-0" href="'.site_url().'/'.$list['menu_url'].'">'.trim($list['menu_title']).' '.$icon.'</a>';
+        $str .= '<li><a class="nav-link py-0" href="'.site_url().'/'.$list['menu_url'].'">'.trim($list['menu_title']).' '.$icon.'</a>';
         
         // if($subchild != '') {
         //     // $str .= '<ul class="dropdown-menu">';

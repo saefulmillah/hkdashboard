@@ -61,7 +61,8 @@ class Grafik24Jam extends CI_Controller
 				    	SUM(CASE WHEN metoda = 'Tunai/Umum' THEN 1 ELSE 0 END) cash_traffic,
 						SUM(CASE WHEN metoda <> 'Tunai/Umum' THEN 1 ELSE 0 END) non_cash_traffic,
 			    		SUM(CASE WHEN metoda = 'Tunai/Umum' THEN rupiah ELSE 0 END) cash_revenue,
-						SUM(CASE WHEN metoda <> 'Tunai/Umum' THEN rupiah ELSE 0 END) non_cash_revenue
+						SUM(CASE WHEN metoda <> 'Tunai/Umum' THEN rupiah ELSE 0 END) non_cash_revenue,
+						SUM(rupiah) total_revenue
 					FROM lalin
 					WHERE 
 					waktu > DATE_SUB(NOW(), INTERVAL 1 DAY) 

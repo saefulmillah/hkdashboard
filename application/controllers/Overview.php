@@ -38,14 +38,14 @@ class Overview extends CI_Controller {
 		);
 
 		// layout
-		$layout = array('header' => $this->load->view('layout/_header', $data, TRUE),
+		$layout = array('header' => $this->load->view('layout/overview/_overview_header', $data, TRUE),
 						'style'  => $this->load->view('overview/style', '', TRUE),
-						'menu' => $this->load->view('layout/_menu', $data, TRUE),
+						'menu' => $this->load->view('layout/overview/_overview_menu', $data, TRUE),
 						'index'  => $this->load->view('overview/index', '', TRUE),
 						'js' => $this->load->view('overview/js', '', TRUE), 
-						'footer' => $this->load->view('layout/_footer', '', TRUE),
+						'footer' => $this->load->view('layout/overview/_overview_footer', '', TRUE),
 						);
 
-		$this->load->view('layout/_main', $layout);
+		$this->load->view('layout/overview/_overview_main', $layout);
 	}
 }

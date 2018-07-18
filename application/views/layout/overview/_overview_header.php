@@ -20,7 +20,7 @@
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css?family=Orbitron');
         body {
-          /*height: 768px;*/
+          height: 768px;
           font-family: 'Orbitron', sans-serif;
           overflow: hidden;
           background-image: url(<?=base_url('assets/images/bg3.jpg')?>);

@@ -1,9 +1,10 @@
 <style type="text/css">
 .body-dashboard {
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 }
 .chart-container {
     float: left;
+    padding: 1em 1em;
 }
 
 #chart2
@@ -23,7 +24,7 @@
     z-index: 1000;
     position: absolute;
     top: 113px;
-    left: 82px;
+    left: 81px;
 }
 
 #progress2
@@ -101,8 +102,8 @@
     height: 300px;
     width: 300px;
     position: absolute;
-    top: 249px;
-    left: 410px;
+    top: 254px;
+    left: 409px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;

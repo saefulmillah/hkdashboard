@@ -4341,8 +4341,8 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  /*border-radius: 0.25rem;*/
+  /*border: 1px solid rgba(0, 0, 0, 0.125);*/
+  border-radius: 0.8rem;
 }
 
 .card > hr {
@@ -4363,7 +4363,7 @@ input[type="button"].btn-block {
 .card-body {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
 .card-title {
@@ -4388,7 +4388,7 @@ input[type="button"].btn-block {
 }
 
 .card-header {
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
@@ -6028,6 +6028,14 @@ button.close {
   background-color: #007bff !important;
 }
 
+.bg-dark-blue {
+  background-color: #003366 !important;
+}
+
+.bg-dark-blue2 {
+  background-color: #003399 !important;
+}
+
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
@@ -6193,8 +6201,8 @@ button.bg-dark:focus {
 }
 
 .rounded-top {
-  border-top-left-radius: 0.25rem !important;
-  border-top-right-radius: 0.25rem !important;
+  border-top-left-radius: 0.8rem !important;
+  border-top-right-radius: 0.8rem !important;
 }
 
 .rounded-right {

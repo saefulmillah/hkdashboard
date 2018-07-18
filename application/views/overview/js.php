@@ -5,14 +5,16 @@ var handle_progressBar = function () {
 	    value: 0.6,
 	    size: 170,
 	    thickness:10,
-	    fill: {gradient: ['#ff1e41', '#ff5f43']}
+	    fill: {
+	    	color: ['#ffb900']
+	    }
 	});
 	$('#progress2').circleProgress({
 	    value: 0.5,
 	    size: 150,
 	    thickness:10,
 	    fill: {
-	      color: ["green"]
+	      color: ['#ffb900']
 	    }
 	});
 	$('#progress3').circleProgress({
@@ -20,7 +22,7 @@ var handle_progressBar = function () {
 	    size: 190,
 	    thickness:10,
 	    fill: {
-	      color: ["blue"]
+	      color: ['#FF0700']
 	    }
 	});
 	$('#progress4').circleProgress({
@@ -28,7 +30,7 @@ var handle_progressBar = function () {
 	    size: 190,
 	    thickness:10,
 	    fill: {
-	      color: ["Yellow"]
+	      color: ['#23C700']
 	    }
 	});
 }

@@ -23,8 +23,8 @@
     width: 300px;*/
     z-index: 1000;
     position: absolute;
-    top: 113px;
-    left: 81px;
+    top: 124px;
+    left: 142px;
 }
 
 #progress2
@@ -41,10 +41,10 @@
 {
     /*height: 300px;
     width: 300px;*/
-    z-index: 1000;
+    z-index: -1;
     position: absolute;
-    top: 103px;
-    left: 71px;
+    top: 114px;
+    left: 132px;
 }
 
 #progress4
@@ -53,17 +53,17 @@
     width: 300px;*/
     z-index: 1000;
     position: absolute;
-    top: 350px;
-    left: 193px;
+    top: 401px;
+    left: 274px;
 }
 
 #gear1
 {
-    height: 300px;
-    width: 300px;
+    height: 350px;
+    width: 350px;
     position: absolute;
     top: 48px;
-    left: 17px;
+    left: 67px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
@@ -79,11 +79,11 @@
 
 #gear2
 {
-    height: 300px;
-    width: 300px;
+    height: 350px;
+    width: 350px;
     position: absolute;
-    top: 295px;
-    left: 138px;
+    top: 335px;
+    left: 209px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
@@ -99,11 +99,11 @@
 
 #gear3
 {
-    height: 300px;
-    width: 300px;
+    height: 350px;
+    width: 350px;
     position: absolute;
-    top: 254px;
-    left: 409px;
+    top: 189px;
+    left: 495px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;

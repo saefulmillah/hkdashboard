@@ -3,7 +3,7 @@
 var handle_progressBar = function () {
 	$('#progress1').circleProgress({
 	    value: 0.6,
-	    size: 170,
+	    size: 200,
 	    thickness:10,
 	    fill: {
 	    	color: ['#ffb900']
@@ -19,7 +19,7 @@ var handle_progressBar = function () {
 	});
 	$('#progress3').circleProgress({
 	    value: 0.8,
-	    size: 190,
+	    size: 220,
 	    thickness:10,
 	    fill: {
 	      color: ['#FF0700']
@@ -27,7 +27,7 @@ var handle_progressBar = function () {
 	});
 	$('#progress4').circleProgress({
 	    value: 0.8,
-	    size: 190,
+	    size: 220,
 	    thickness:10,
 	    fill: {
 	      color: ['#23C700']

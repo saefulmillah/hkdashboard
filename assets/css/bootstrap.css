@@ -4342,7 +4342,7 @@ input[type="button"].btn-block {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  /*border-radius: 0.25rem;*/
 }
 
 .card > hr {
@@ -4395,7 +4395,7 @@ input[type="button"].btn-block {
 }
 
 .card-header:first-child {
-  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+  /*border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;*/
 }
 
 .card-header + .list-group .list-group-item:first-child {
@@ -6203,8 +6203,8 @@ button.bg-dark:focus {
 }
 
 .rounded-bottom {
-  border-bottom-right-radius: 0.25rem !important;
-  border-bottom-left-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.8rem !important;
+  border-bottom-left-radius: 0.8rem !important;
 }
 
 .rounded-left {

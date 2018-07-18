@@ -1,32 +1,19 @@
 <style type="text/css">
 .body-dashboard {
-	height: 768px;
-    overflow: auto;
-    /*background-image: url(<?//=base_url('assets/images/background3.jpg')?>);*/
-    background-size: cover;
+	margin-top: 20px;
 }
 .chart-container {
     float: left;
 }
 
-#gear1
+#chart2
 {
-    height: 300px;
-    width: 300px;
+    /*height: 300px;
+    width: 300px;*/
+    z-index: 1000;
     position: absolute;
-    top: 50px;
-    left: 17px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 50%;
-    /*cross browser transform*/
-    -moz-transform-origin: 50% 50%;
-    -webkit-transform-origin: 50% 50%;
-    transform-origin: 50% 50%;
-    /*calling cross browser animation*/
-    animation: rotation 10s linear infinite normal;
-    -webkit-animation: rotation 10s linear infinite normal;
-    -moz-animation: rotation 10s linear infinite normal;
+    top: 21.94rem;
+    left: 6.1rem;
 }
 
 #progress1
@@ -36,7 +23,7 @@
     z-index: 1000;
     position: absolute;
     top: 113px;
-    left: 81px;
+    left: 82px;
 }
 
 #progress2
@@ -55,8 +42,38 @@
     width: 300px;*/
     z-index: 1000;
     position: absolute;
-    top: 107px;
-    left: 75px;
+    top: 103px;
+    left: 71px;
+}
+
+#progress4
+{
+    /*height: 300px;
+    width: 300px;*/
+    z-index: 1000;
+    position: absolute;
+    top: 350px;
+    left: 193px;
+}
+
+#gear1
+{
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    top: 48px;
+    left: 17px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    /*cross browser transform*/
+    -moz-transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    /*calling cross browser animation*/
+    animation: rotation 40s linear infinite normal;
+    -webkit-animation: rotation 40s linear infinite normal;
+    -moz-animation: rotation 40s linear infinite normal;
 }
 
 #gear2
@@ -74,9 +91,9 @@
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
     /*calling cross browser animation*/
-    animation: rotation 10s linear infinite reverse;
-    -webkit-animation: rotation 10s linear infinite reverse;
-    -moz-animation: rotation 10s linear infinite reverse;
+    animation: rotation 40s linear infinite reverse;
+    -webkit-animation: rotation 40s linear infinite reverse;
+    -moz-animation: rotation 40s linear infinite reverse;
 }
 
 #gear3
@@ -94,9 +111,9 @@
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
     /*calling cross browser animation*/
-    animation: rotation 10s linear infinite normal;
-    -webkit-animation: rotation 10s linear infinite normal;
-    -moz-animation: rotation 10s linear infinite normal;
+    animation: rotation 40s linear infinite normal;
+    -webkit-animation: rotation 40s linear infinite normal;
+    -moz-animation: rotation 40s linear infinite normal;
 }
 
 /*cross browser animation */

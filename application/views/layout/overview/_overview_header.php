@@ -16,7 +16,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="<?=base_url('assets/css/simple-sidebar.css')?>" rel="stylesheet">
+    <link href="<?=base_url('assets/css/mdb.min.css')?>" rel="stylesheet">
     <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Orbitron');
+        body {
+          /*height: 768px;*/
+          font-family: 'Orbitron', sans-serif;
+          overflow: hidden;
+          background-image: url(<?=base_url('assets/images/bg3.jpg')?>);
+          background-size: cover;
+        }
         .nav-link[data-toggle].collapsed:after {
             content: "▾";
         }
@@ -61,6 +70,7 @@
           background-color: #5a6268;
           border-color: #545b62;
         }
+
     </style>
 
 </head>

@@ -21,10 +21,12 @@
         @import url('https://fonts.googleapis.com/css?family=Orbitron');
         body {
           height: 768px;
-          font-family: 'Orbitron', sans-serif;
           overflow: hidden;
           background-image: url(<?=base_url('assets/images/bg3.jpg')?>);
           background-size: cover;
+        }
+        .font-roboto {
+          font-family: 'Orbitron', sans-serif;
         }
         .nav-link[data-toggle].collapsed:after {
             content: "▾";

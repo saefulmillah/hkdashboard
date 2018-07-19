@@ -10,29 +10,29 @@ class Overview extends CI_Controller {
         $this->load->model('permission_model','permission');
 		$this->load->model('menus_model', 'menu');
 		$arrGroups = array('admin');
-		if (!$this->ion_auth->logged_in())
-		{
-			// redirect them to the login page
-			redirect('auth/login', 'refresh');
-		} 
-		elseif (!$this->ion_auth->in_group($arrGroups))
-		{
-			$groups = '';
-			$i=0;
-			foreach ($arrGroups as $row) {
-				$groups .= $arrGroups[$i].',';
-				$i++;
-			}
-			// redirect them to the home page because they must be an administrator to view this
-			return show_error('You must be a part of '.$groups.' to view this page');
-		}
+		// if (!$this->ion_auth->logged_in())
+		// {
+		// 	// redirect them to the login page
+		// 	redirect('auth/login', 'refresh');
+		// } 
+		// elseif (!$this->ion_auth->in_group($arrGroups))
+		// {
+		// 	$groups = '';
+		// 	$i=0;
+		// 	foreach ($arrGroups as $row) {
+		// 		$groups .= $arrGroups[$i].',';
+		// 		$i++;
+		// 	}
+		// 	// redirect them to the home page because they must be an administrator to view this
+		// 	return show_error('You must be a part of '.$groups.' to view this page');
+		// }
 	}
 
 	public function index()
 	{
 		// layout
 		$data = array(
-			'title' => 'Permission', 
+			'title' => 'Overview', 
 			'multilevel' => $this->menu->get_menu_for_level($parent=0),
 			'breadcrumb' => 'Overview'
 		);

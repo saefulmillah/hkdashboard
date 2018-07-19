@@ -83,6 +83,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+	<img title="Press Reload if no image is displayed" src="http://202.154.181.42:1985/mjpg/video.mjpg?resolution=320x240" id="img-19+850" data-name="19+850" class="cctv-image" style="cursor: crosshair;" width="240" height="192">
+	<img title="Press Reload if no image is displayed" src="http://202.154.181.42:2520/mjpg/video.mjpg?resolution=320x240" id="img-25+200" data-name="25+200" class="cctv-image" style="cursor: crosshair;" width="240" height="192">
 </div>
 
 </body>

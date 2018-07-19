@@ -1,5 +1,50 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {'packages':['gauge']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+  function drawChart() {
+
+    // Create the data table.
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['Memory', 80],
+    ]);
+
+    // Set chart options
+    var options = {
+		          width: 150,
+		          redFrom: 90, redTo: 100,
+		          yellowFrom:75, yellowTo: 90,
+		          minorTicks: 5
+		        };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.Gauge(document.getElementById('RTMS'));
+    chart.draw(data, options);
+
+    setInterval(function() {
+      data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+      chart.draw(data, options);
+    }, 13000);
+    setInterval(function() {
+      data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+      chart.draw(data, options);
+    }, 5000);
+    setInterval(function() {
+      data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+      chart.draw(data, options);
+    }, 26000);
+  }
+</script>
+<script type="text/javascript">
 var handle_progressBar = function () {
 	$('#progress1').circleProgress({
 	    value: 0.6,
@@ -31,24 +76,6 @@ var handle_progressBar = function () {
 	    thickness:10,
 	    fill: {
 	      color: ['#23C700']
-	    }
-	});
-}
-
-var handle_chart = function () {
-	var ctxD = document.getElementById("doughnutChart").getContext('2d');
-	// Chart options
-	Chart.defaults.global.legend.display = false;
-	var myLineChart = new Chart(ctxD, {
-	    type: 'doughnut',
-	    data: {
-	        labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
-	        datasets: [
-	            {
-	                data: [300, 50],
-	                backgroundColor: ["#F7464A", "#46BFBD"],
-	            }
-	        ]
 	    }
 	});
 }

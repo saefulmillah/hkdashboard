@@ -16,13 +16,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="<?=base_url('assets/css/simple-sidebar.css')?>" rel="stylesheet">
-    <link href="<?=base_url('assets/css/mdb.min.css')?>" rel="stylesheet">
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css?family=Orbitron');
         body {
-          height: 768px;
+          /*height: 768px;*/
           overflow: hidden;
-          background-image: url(<?=base_url('assets/images/bg3.jpg')?>);
+          background-position: 0px -350px;
+          background-image: url(<?=base_url('assets/images/bg8.jpg')?>);
+          /*background-position: 0px -30px;
+          background-image: url(<?//=base_url('assets/images/bg13.jpg')?>);*/
           background-size: cover;
         }
         .font-roboto {

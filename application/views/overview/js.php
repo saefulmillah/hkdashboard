@@ -15,7 +15,7 @@
     // Create the data table.
     var data = google.visualization.arrayToDataTable([
       ['Label', 'Value'],
-      ['Memory', 80],
+      ['RTMS', 80],
     ]);
 
     // Set chart options
@@ -48,7 +48,7 @@
 var handle_progressBar = function () {
 	$('#progress1').circleProgress({
 	    value: 0.6,
-	    size: 200,
+	    size: 205,
 	    thickness:10,
 	    fill: {
 	    	color: ['#ffb900']
@@ -64,7 +64,7 @@ var handle_progressBar = function () {
 	});
 	$('#progress3').circleProgress({
 	    value: 0.8,
-	    size: 220,
+	    size: 225,
 	    thickness:10,
 	    fill: {
 	      color: ['#FF0700']
@@ -72,7 +72,7 @@ var handle_progressBar = function () {
 	});
 	$('#progress4').circleProgress({
 	    value: 0.8,
-	    size: 220,
+	    size: 225,
 	    thickness:10,
 	    fill: {
 	      color: ['#23C700']

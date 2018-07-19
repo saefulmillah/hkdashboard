@@ -23,8 +23,8 @@
     width: 300px;*/
     z-index: 1000;
     position: absolute;
-    top: 124px;
-    left: 142px;
+    top: 121px;
+    left: 140px;
 }
 
 #progress2
@@ -39,22 +39,21 @@
 
 #progress3
 {
-    /*height: 300px;
-    width: 300px;*/
+    height: 225px;
+    /*width: 300px;*/
     z-index: -1;
     position: absolute;
-    top: 114px;
-    left: 132px;
+    top: 111px;
+    left: 130px;
 }
 
 #progress4
 {
-    /*height: 300px;
-    width: 300px;*/
+    height: 225px;
     z-index: 1000;
     position: absolute;
-    top: 401px;
-    left: 274px;
+    top: 397px;
+    left: 272px;
 }
 
 #gear1

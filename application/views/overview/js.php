@@ -1,7 +1,8 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYyTslZ7iqZ_IVXWWHzyaESvkHYKewW7Y&callback=handle_map" async defer></script>
 <script type="text/javascript">
-
-  // Load the Visualization API and the corechart package.
+var handle_rtms = function () {
+	// Load the Visualization API and the corechart package.
   google.charts.load('current', {'packages':['gauge']});
 
   // Set a callback to run when the Google Visualization API is loaded.
@@ -43,8 +44,7 @@
       chart.draw(data, options);
     }, 26000);
   }
-</script>
-<script type="text/javascript">
+}
 var handle_progressBar = function () {
 	$('#progress1').circleProgress({
 	    value: 0.6,
@@ -55,11 +55,11 @@ var handle_progressBar = function () {
 	    }
 	});
 	$('#progress2').circleProgress({
-	    value: 0.5,
-	    size: 150,
+	    value: 0.9,
+	    size: 225,
 	    thickness:10,
 	    fill: {
-	      color: ['#ffb900']
+	      gradient: ['#00CC00','#00b744']
 	    }
 	});
 	$('#progress3').circleProgress({
@@ -70,18 +70,110 @@ var handle_progressBar = function () {
 	      color: ['#FF0700']
 	    }
 	});
-	$('#progress4').circleProgress({
-	    value: 0.8,
-	    size: 225,
-	    thickness:10,
-	    fill: {
-	      color: ['#23C700']
-	    }
+	// $('#progress4').circleProgress({
+	//     value: 0.4,
+	//     size: 225,
+	//     thickness:10,
+	//     fill: {
+	//       gradient: ['#06799F','#3AAACF']
+	//     }
+	// });
+}
+
+var handle_revenue = function () {
+	var str_url = "<?=site_url('Overview/getDataRevenue')?>";
+	$.ajax({
+		url : str_url,
+		dataType: 'json',
+		success : function (json) {
+			console.log(json.persen);
+			$('#txtRevenue').text(json.persen);
+			$('#txtTotalPendapatan').text(json.Total_Rupiah);
+			$('#txtTotalLalin').text(json.Total_lalin);
+			$('#progress4').circleProgress({
+			    value: json.persen*0.01,
+			    size: 225,
+			    thickness:10,
+			    fill: {
+			      gradient: ['#06799F','#3AAACF']
+			    }
+			});
+		}
+	})
+}
+
+var handle_method_revenue = function () {
+	var str_url = "<?=site_url('Overview/getDataMethodRevenue')?>";
+	$.ajax({
+		url : str_url,
+		dataType: 'json',
+		success : function (json) {
+			console.log(json.persen);
+			$('#txtBNI').text(json.BNI);
+			$('#txtMandiri').text(json.Mandiri);
+			$('#txtBCA').text(json.BCA);
+			$('#txtBRI').text(json.BRI);	
+			$('#txtTunai').text(json.Tunai);	
+		}
+	})
+}
+
+var handle_map = function () {
+	var map;
+	var url = "<?=base_url('/assets/images/')?>"
+	var icon_gate = url+'gate.ico'
+	//Array lokasi CCTV
+	var location_cctv = [
+		['KM 58+400', -6.1479851, 106.9394857],
+		['KM 59+400A', -6.145732, 106.940066],	
+	];
+	//Array lokasi gerbang tol
+	var location_gt = [
+		['GT Kebong Bawang', -6.119516, 106.893372, icon_gate],
+		['GT Koja Barat', -6.108297, 106.902490, icon_gate],
+		['GT Koja Direct', -6.102913, 106.900045, icon_gate],
+		['GT Semper 1', -6.139385, 106.937772, icon_gate],
+	];
+
+	var contentString = '<img src="http://202.154.181.42:2030/mjpg/video.mjpg?resolution=320x240" width="130">';
+
+	//Create Maps
+	map = new google.maps.Map(document.getElementById('ATPmap'), {
+	  center: {lat: -6.1182356, lng: 106.9084457},
+	  zoom: 13
 	});
+	// Init untuk menampilkan info windows
+	var infowindow = new google.maps.InfoWindow({
+		maxWidth: 200,
+	});
+	// init variable marker dan index
+    var marker, i;
+
+    for (i = 0; i < location_gt.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(location_gt[i][1], location_gt[i][2]),
+        map: map,
+        // icon: location_gt[i][3],
+      });
+      // event click untuk menampilkan info window
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(contentString);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
 }
 	
 $(document).ready(function() {
     handle_progressBar();
+    handle_rtms();
+    handle_revenue();
+    handle_method_revenue();
+    // setInterval(function() {
+    //    handle_revenue();
+    // 	handle_method_revenue();
+    // }, 10000);
     // handle_chart();
 });		
 </script>

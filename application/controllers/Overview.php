@@ -48,4 +48,22 @@ class Overview extends CI_Controller {
 
 		$this->load->view('layout/overview/_overview_main', $layout);
 	}
+
+	public function getDataRevenue()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "CALL sp_calculate_revenue_monthly (4000000000)";
+		$query = $dbATP->query($sql)->row();
+
+		echo json_encode($query);
+	}
+
+	public function getDataMethodRevenue()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "CALL sp_calculate_method_monthly()";
+		$query = $dbATP->query($sql)->row();
+
+		echo json_encode($query);
+	}
 }

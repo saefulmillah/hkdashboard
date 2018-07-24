@@ -29,12 +29,12 @@
 
 #progress2
 {
-    /*height: 300px;
-    width: 300px;*/
-    z-index: 1000;
+    height: 225px;
+    /*width: 300px;*/
+    z-index: -1;
     position: absolute;
-    top: 123px;
-    left: 92px;
+    top: 251px;
+    left: 557px;
 }
 
 #progress3

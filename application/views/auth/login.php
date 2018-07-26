@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>[pagetitle] - Hutama Karya Toll Dashboard</title>
+    <title>Login - Hutama Karya Toll Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url('assets/css/bootstrap.css')?>" rel="stylesheet">

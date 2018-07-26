@@ -3,7 +3,7 @@
  
 var table;
 var handle_grafik24Jam = function () {
-    var url = "<?=site_url('transaction/Grafik24Jam/getData24Jam')?>";
+    var url = "<?=site_url('Transaction/Grafik24Jam/getData24Jam')?>";
     // Build the chart
     var timestamp_json = new Array();
     var cashTraffic_json = new Array();   

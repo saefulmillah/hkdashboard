@@ -15,19 +15,19 @@
 			<div class="col-md-8 chart-container">
 				<div>
 					<div id="progress1">
-						<div class="font-roboto" style="font-size: 2rem; font-weight: bold; color:#FF0700; position: absolute; top: 85px; left: 35px; line-height: 1rem;">75<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Accident</span></div>
+						<div class="font-roboto" style="font-size: 2rem; font-weight: bold; color:#FF0700; position: absolute; top: 85px; left: 35px; line-height: 1rem; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);">75<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Accident</span></div>
 					</div>
 					<!-- <div id="progress2" >
 						<div style="font-size: 1.2rem; font-weight: bold; color:#ffb900; position: absolute; top: 65px; left: 55px; line-height: 1rem;">70<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Potholes</span></div>
 					</div> -->
-					<div id="progress3" style="background-color: #003366; z-index: -1;" class="rounded-circle">
+					<div id="progress3" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
 						<div class="font-roboto" style="font-size: 2rem; font-weight: bold; color:#ffb900; position: absolute; top: 95px; left: 122px; line-height: 1rem;">50<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Potholes</span></div>
 					</div>
-					<div id="progress4" style="background-color: #003366; z-index: -1;" class="rounded-circle">
+					<div id="progress4" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
 						<div class="font-roboto" style="font-size: 3rem; font-weight: thin; color:#3AAACF; position: absolute; top: 83px; left: 65px; line-height: 1.5rem;" ><span id="txtRevenue">0</span><span style="font-size: 1.5rem;">%</span><br><span style="font-size: 1.4rem;">Revenue</span></div>
 					</div>
 
-					<div id="progress2" style="background-color: #003366; z-index: -1;" class="rounded-circle">
+					<div id="progress2" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
 						<div class="font-roboto" style="font-size: 3rem; font-weight: thin; color:#23C700; position: absolute; top: 83px; left: 50px; line-height: 1.5rem;" ><span id="txtSettlement">0</span><span style="font-size: 1.5rem;">%</span><br><span style="font-size: 1.4rem;">Settlement</span></div>
 					</div>
 
@@ -44,7 +44,7 @@
 			  <div class="p-2 bd-highlight">Flex item 2</div>
 			  <div class="p-2 bd-highlight">Flex item 3</div>
 			</div> -->
-			<div class="col-md-4 chart-container bg-dark-blue3" style="position: absolute;right:0px; -webkit-box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);-moz-box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);">	
+			<div class="col-md-4 chart-container bg-dark-blue3" style="position: absolute;right:0px; top: -5px; -webkit-box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);-moz-box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);">	
 				
 				<div class="card border border-primary bg-dark-blue2">
 				  <h6 class="card-header font-roboto text-white bg-dark-blue2 rounded-top">Revenue per <?=date('F')." '".date('d')?></h6>
@@ -94,7 +94,7 @@
 				  </div>
 				</div>
 
-				<div class="card border border-primary bg-dark-blue2" style="margin-top: 0.5rem; height: 270px;" id="ATPmap">
+				<div class="card border border-primary bg-dark-blue2" style="margin-top: 0.5rem; height: 220px;" id="ATPmap">
 				</div>
 			</div>
 		</div>

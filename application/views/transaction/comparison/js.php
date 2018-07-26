@@ -3,7 +3,7 @@
  
 var table;
 var handle_lalinAntarGerbang = function () {
-    var url = "<?=site_url('transaction/comparison/getDataLalinAntarGerbang')?>";
+    var url = "<?=site_url('Transaction/comparison/getDataLalinAntarGerbang')?>";
     // Build the chart
     var processed_json = new Array();   
     $.getJSON(url, function(data) {
@@ -47,7 +47,7 @@ var handle_lalinAntarGerbang = function () {
 }
 
 var handle_pendapatanAntarGerbang = function () {
-    var url = "<?=site_url('transaction/comparison/getDataPendapatanAntarGerbang')?>";
+    var url = "<?=site_url('Transaction/comparison/getDataPendapatanAntarGerbang')?>";
     // Build the chart
     var processed_json = new Array();   
     $.getJSON(url, function(data) {
@@ -91,7 +91,7 @@ var handle_pendapatanAntarGerbang = function () {
 }
 
 var handle_comparisonMethodPayment = function () {
-    var url = "<?=site_url('transaction/comparison/getComparisonMethodPayment')?>";
+    var url = "<?=site_url('Transaction/comparison/getComparisonMethodPayment')?>";
     // Build the chart
     var processed_json = new Array();   
     $.getJSON(url, function(data) {
@@ -135,7 +135,7 @@ var handle_comparisonMethodPayment = function () {
 }
 
 var handle_NoTranALRantarGerbang = function () {
-    var url = "<?=site_url('transaction/comparison/getNotranALRperGerbang')?>";
+    var url = "<?=site_url('Transaction/comparison/getNotranALRperGerbang')?>";
     // Build the chart
     var processed_json = new Array();   
     $.getJSON(url, function(data) {
@@ -178,7 +178,7 @@ var handle_NoTranALRantarGerbang = function () {
 }
 
 var handle_NoTranLSBantarGerbang = function () {
-    var url = "<?=site_url('transaction/comparison/getNotranLSBperGerbang')?>";
+    var url = "<?=site_url('Transaction/comparison/getNotranLSBperGerbang')?>";
     // Build the chart
     var processed_json = new Array();   
     $.getJSON(url, function(data) {
@@ -230,7 +230,7 @@ var handle_NoTranLSBantarGerbang = function () {
 }
 
 var handle_LalinAntarGolongan = function () {
-    var url = "<?=site_url('transaction/comparison/getLalinPerGolongan')?>";
+    var url = "<?=site_url('Transaction/comparison/getLalinPerGolongan')?>";
     // Build the chart
     var processed_json = new Array();   
     $.getJSON(url, function(data) {

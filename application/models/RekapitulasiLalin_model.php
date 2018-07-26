@@ -4,10 +4,26 @@
  */
 class RekapitulasiLalin_model extends CI_Model
 {
-	var $table = 'v_rekapitulasi_lalin';
+	var $select = "NoGerbang AS nogerbang,
+                  Gerbang AS gerbang,
+                  NoGardu AS nogardu,
+                  Tanggal AS tanggal,
+                  SUM((CASE WHEN (Golongan = 1) THEN ((((RpTunai + RpMandiri) + RpBRI) + RpBNI) + RpBCA) ELSE 0 END)) AS rp1,
+                  SUM((CASE WHEN (Golongan = 1) THEN ((((Tunai + Mandiri) + BRI) + BNI) + BCA) ELSE 0 END)) AS lalin1,
+                  SUM((CASE WHEN (Golongan = 2) THEN ((((RpTunai + RpMandiri) + RpBRI) + RpBNI) + RpBCA) ELSE 0 END)) AS rp2,
+                  SUM((CASE WHEN (Golongan = 2) THEN ((((Tunai + Mandiri) + BRI) + BNI) + BCA) ELSE 0 END)) AS lalin2,
+                  SUM((CASE WHEN (Golongan = 3) THEN ((((RpTunai + RpMandiri) + RpBRI) + RpBNI) + RpBCA) ELSE 0 END)) AS rp3,
+                  SUM((CASE WHEN (Golongan = 3) THEN ((((Tunai + Mandiri) + BRI) + BNI) + BCA) ELSE 0 END)) AS lalin3,
+                  SUM((CASE WHEN (Golongan = 4) THEN ((((RpTunai + RpMandiri) + RpBRI) + RpBNI) + RpBCA) ELSE 0 END)) AS rp4,
+                  SUM((CASE WHEN (Golongan = 4) THEN ((((Tunai + Mandiri) + BRI) + BNI) + BCA) ELSE 0 END)) AS lalin4,
+                  SUM((CASE WHEN (Golongan = 5) THEN ((((RpTunai + RpMandiri) + RpBRI) + RpBNI) + RpBCA) ELSE 0 END)) AS rp5,
+                  SUM((CASE WHEN (Golongan = 5) THEN ((((Tunai + Mandiri) + BRI) + BNI) + BCA) ELSE 0 END)) AS lalin5,
+                  SUM(((((Tunai + Mandiri) + BRI) + BNI) + BCA)) AS total,
+                  SUM(((((RpTunai + RpMandiri) + RpBRI) + RpBNI) + RpBCA)) AS rptotal";
+    var $table = 'eoj';
 	var $column_order = array('Gerbang','nogardu','rp1','lalin1','rp2','lalin2','rp3','lalin3','rp4','lalin4','rp5','lalin5','total','rptotal');
 	var $column_search = array('Gerbang','nogardu','rp1','lalin1','rp2','lalin2','rp3','lalin3','rp4','lalin4','rp5','lalin5','total','rptotal');
-	var $order = array('tanggal' => 'desc');
+	var $order = array('NoGerbang' => 'ASC');
 
 	public function __construct()
 	{
@@ -17,7 +33,23 @@ class RekapitulasiLalin_model extends CI_Model
 
 	private function _get_datatables_query()
 	{
-		$this->dbATP->from($this->table);
+        //add custom filter here
+        if($this->input->post('start_date'))
+        {
+            $this->dbATP->where("tanggal >=", $this->input->post('start_date'));
+        } 
+        if($this->input->post('end_date'))
+        {
+            $this->dbATP->where("tanggal <=", $this->input->post('end_date'));
+        } 
+        else 
+        {
+            $this->dbATP->where("tanggal >= DATE_FORMAT(CURDATE(),'%Y-%m-%d') AND tanggal <= CURDATE()");
+        }
+
+		$this->dbATP->select($this->select);
+        $this->dbATP->from($this->table);
+        $this->dbATP->group_by(array('NoGerbang','Gerbang','NoGardu'));
  
         $i = 0;
      
@@ -71,7 +103,7 @@ class RekapitulasiLalin_model extends CI_Model
  
     public function count_all()
     {
-        $this->dbATP->from($this->table);
+        $this->_get_datatables_query();
         return $this->dbATP->count_all_results();
     }
 }

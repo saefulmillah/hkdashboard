@@ -4,7 +4,25 @@
  */
 class LaporanHarian_model extends CI_Model
 {
-	var $table = 'v_laporan_harian';
+	var $select = "DATE_FORMAT(`Waktu`,'%M-%d') AS tanggal,
+                  `lalin`.`Gerbang` AS `Gerbang`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE 'eToll%') AND (`lalin`.`Shift` = 1)) THEN 1 ELSE 0 END)) AS `eToll_shift1`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE '%Tunai%') AND (`lalin`.`Shift` = 1)) THEN 1 ELSE 0 END)) AS `Tunai_shift1`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE 'eToll%') AND (`lalin`.`Shift` = 2)) THEN 1 ELSE 0 END)) AS `eToll_shift2`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE '%Tunai%') AND (`lalin`.`Shift` = 2)) THEN 1 ELSE 0 END)) AS `Tunai_shift2`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE 'eToll%') AND (`lalin`.`Shift` = 3)) THEN 1 ELSE 0 END)) AS `eToll_shift3`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE '%Tunai%') AND (`lalin`.`Shift` = 3)) THEN 1 ELSE 0 END)) AS `Tunai_shift3`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE 'eToll%') AND (`lalin`.`Shift` = 1)) THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_eToll_shift1`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE '%Tunai%') AND (`lalin`.`Shift` = 1)) THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_Tunai_shift1`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE 'eToll%') AND (`lalin`.`Shift` = 2)) THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_eToll_shift2`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE '%Tunai%') AND (`lalin`.`Shift` = 2)) THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_Tunai_shift2`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE 'eToll%') AND (`lalin`.`Shift` = 3)) THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_eToll_shift3`,
+                  SUM((CASE WHEN ((`lalin`.`Metoda` LIKE '%Tunai%') AND (`lalin`.`Shift` = 3)) THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_Tunai_shift3`,
+                  SUM((CASE WHEN (`lalin`.`Metoda` LIKE 'eToll%') THEN 1 ELSE 0 END)) AS `Total_eToll`,
+                  SUM((CASE WHEN (`lalin`.`Metoda` LIKE '%Tunai%') THEN 1 ELSE 0 END)) AS `Total_Tunai`,
+                  SUM((CASE WHEN (`lalin`.`Metoda` LIKE '%eToll%') THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_eToll`,
+                  SUM((CASE WHEN (`lalin`.`Metoda` LIKE '%Tunai%') THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_Tunai`";
+    var $table = "lalin";
 	var $column_order = array('Gerbang','eToll_shift1','Tunai_shift1','eToll_shift1','Tunai_shift2','eToll_shift2','Tunai_shift3','eToll_shift3','Total_eToll','Total_Tunai','Rupiah_eToll','Rupiah_Tunai');
 	var $column_search = array('Gerbang','eToll_shift1','Tunai_shift1','eToll_shift1','Tunai_shift2','eToll_shift2','Tunai_shift3','eToll_shift3','Total_eToll','Total_Tunai','Rupiah_eToll','Rupiah_Tunai');
 	var $order = array('Gerbang' => 'asc');
@@ -17,7 +35,17 @@ class LaporanHarian_model extends CI_Model
 
 	private function _get_datatables_query()
 	{
-		$this->dbATP->from($this->table);
+        //add custom filter here
+        if($this->input->post('start_date'))
+        {
+            $this->dbATP->where("DATE_FORMAT(`Waktu`,'%Y-%m-%d')", $this->input->post('start_date'));
+        } else {
+            $this->dbATP->where("DATE_FORMAT(`Waktu`,'%Y-%m-%d') >= CURDATE()");
+        }
+
+        $this->dbATP->select($this->select);
+		    $this->dbATP->from($this->table);
+        $this->dbATP->group_by('Gerbang');
  
         $i = 0;
      
@@ -71,7 +99,9 @@ class LaporanHarian_model extends CI_Model
  
     public function count_all()
     {
+        $this->dbATP->select($this->select);
         $this->dbATP->from($this->table);
+        $this->dbATP->group_by('Gerbang');
         return $this->dbATP->count_all_results();
     }
 }

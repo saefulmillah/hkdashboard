@@ -61,19 +61,20 @@ class LaporanHarian extends CI_Controller
 	            $no++;
 	            $row = array();
 	            $row[] = $no;
+	            $row[] = $rekaplalin->tanggal;
 	            $row[] = $rekaplalin->Gerbang;
 	            $row[] = $rekaplalin->eToll_shift1;
 	            $row[] = $rekaplalin->Tunai_shift1;
-	            $row[] = $rekaplalin->Rupiah_eToll_shift1;
-	            $row[] = $rekaplalin->Rupiah_Tunai_shift1;
+	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift1,2,",",".");
+	            $row[] = number_format($rekaplalin->Rupiah_Tunai_shift1,2,",",".");
 	            $row[] = $rekaplalin->eToll_shift2;
 	            $row[] = $rekaplalin->Tunai_shift2;
-	            $row[] = $rekaplalin->Rupiah_eToll_shift2;
-	            $row[] = $rekaplalin->Rupiah_Tunai_shift2;
+	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift2,2,",",".");
+	            $row[] = number_format($rekaplalin->Rupiah_Tunai_shift2,2,",",".");
 	            $row[] = $rekaplalin->eToll_shift3;
 	            $row[] = $rekaplalin->Tunai_shift3;
-	            $row[] = $rekaplalin->Rupiah_eToll_shift3;
-	            $row[] = $rekaplalin->Rupiah_Tunai_shift3;
+	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift3,2,",",".");
+	            $row[] = number_format($rekaplalin->Rupiah_Tunai_shift3,2,",",".");
 	            $row[] = $rekaplalin->Total_eToll;
 	            $row[] = $rekaplalin->Total_Tunai;
 	            $row[] = number_format($rekaplalin->Rupiah_eToll,2,",",".");
@@ -91,4 +92,28 @@ class LaporanHarian extends CI_Controller
 	        //output to json format
 	        echo json_encode($output);
 		}
+
+	public function test_post()
+	{
+		$startdate = $_POST['start_date'];
+		$enddate = $_POST['end_date'];
+
+		$strQuery = 'Main Query %s %s';
+
+		if (isset($startdate)) {
+			$where1 = $startdate;
+		} 
+
+		if (isset($enddate)) {
+			$where2 = $enddate;
+		} 
+		$query = sprintf($strQuery,$where1,$where2);
+		echo $query;
+		
+	}
+
+	public function exp_excel()
+	{
+		$this->load->view('transaction/LaporanHarian/export_excel', '', TRUE);
+	}
 }

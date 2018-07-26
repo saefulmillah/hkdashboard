@@ -18,7 +18,8 @@ class Menus_model extends CI_Model
 									INNER JOIN ion_groups g ON gp.`group_id`=g.`id` 
 									INNER JOIN ion_menu m ON m.`id`=gp.`permission_id`
 									WHERE m.`parent_id`='$parent'
-									AND g.`id`='$group_id'");
+									AND g.`id`='$group_id'
+									AND m.`is_active`='1'");
 	
 		foreach($result->result() as $row)
 		{

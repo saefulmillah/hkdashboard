@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
  
 var table;
@@ -10,11 +12,15 @@ var handle_datatables = function () {
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [], //Initial no order.
         "paging" : false,
+        "sDom": '<"top"i>rt<"bottom"lp><"clear">',
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('transaction/LaporanHarian/getLaporanHarian')?>",
-            "type": "POST"
+            "url": "<?php echo site_url('Transaction/LaporanHarian/getLaporanHarian')?>",
+            "type": "POST",
+            "data": function ( data ) {
+                data.start_date = $('#start_date').val();
+            }
         },
  
         //Set column definition initialisation properties.
@@ -26,9 +32,40 @@ var handle_datatables = function () {
         ],
  
     });
+
+    $('#search').click(function(){ //button filter event click
+        table.ajax.reload();  //just reload table
+    });
+}
+
+var handle_submit = function () {
+    var str_url = "<?=site_url('Transaction/LaporanHarian/test_post')?>";
+    $("#search").on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: str_url,
+            dataType: "json",
+            data: $("#myForm").serialize(),
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    })
+}
+
+var handle_datepicker = function () {
+    $( function() {
+        $( "#start_date, #end_date" ).datepicker({
+            altFormat: "yy-mm-dd",
+            dateFormat: "yy-mm-dd"
+        });
+    });
 }
  
 $(document).ready(function() {
     handle_datatables();
+    handle_datepicker();
+    // handle_submit();
 });
 </script>

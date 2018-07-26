@@ -3,7 +3,7 @@
  
 var table;
 var handle_grafikTahunan = function () {
-    var url = "<?=site_url('transaction/GrafikTahunan/getDataGrafikTahunan')?>";
+    var url = "<?=site_url('Transaction/GrafikTahunan/getDataGrafikTahunan')?>";
     // Build the chart
     var timestamp_json = new Array();
     var cashTraffic_json = new Array();   

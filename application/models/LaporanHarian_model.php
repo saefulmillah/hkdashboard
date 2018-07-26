@@ -30,7 +30,7 @@ class LaporanHarian_model extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-        $this->dbATP = $this->load->database('atp', TRUE);
+    $this->dbATP = $this->load->database('atp', TRUE);
 	}
 
 	private function _get_datatables_query()

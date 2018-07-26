@@ -10,6 +10,9 @@ class LaporanHarian extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
+        $this->load->library('PHPReport');
+		$this->load->helper('form');
+        $this->load->helper('download');
 		$this->load->model('LaporanHarian_model', 'LaporanHarian');
 		$this->load->model('menus_model', 'menu');
 		$arrGroups = array('admin','StaffOps');
@@ -93,27 +96,53 @@ class LaporanHarian extends CI_Controller
 	        echo json_encode($output);
 		}
 
-	public function test_post()
+	public function export_excel()
 	{
-		$startdate = $_POST['start_date'];
-		$enddate = $_POST['end_date'];
+		$dbATP = $this->load->database('atp', TRUE);
+		$data = $dbATP->query("SELECT Gerbang,  
+									SUM(CASE WHEN Metoda LIKE 'eToll%' AND Shift = 1 THEN Rupiah ELSE 0 END) AS eToll_shift1, 
+									SUM(CASE WHEN Metoda LIKE '%Tunai%' AND Shift = 1 THEN Rupiah ELSE 0 END) AS Tunai_shift1,
+									SUM(CASE WHEN Metoda LIKE 'eToll%' AND Shift = 2 THEN Rupiah ELSE 0 END) AS eToll_shift2, 
+									SUM(CASE WHEN Metoda LIKE '%Tunai%' AND Shift = 2 THEN Rupiah ELSE 0 END) AS Tunai_shift2,
+									SUM(CASE WHEN Metoda LIKE 'eToll%' AND Shift = 3 THEN Rupiah ELSE 0 END) AS eToll_shift3, 
+									SUM(CASE WHEN Metoda LIKE '%Tunai%' AND Shift = 3 THEN Rupiah ELSE 0 END) AS Tunai_shift3,
+									SUM(CASE WHEN Metoda LIKE '%eToll%' THEN Rupiah ELSE 0 END) AS Total_eToll,
+									SUM(CASE WHEN Metoda LIKE '%Tunai%' THEN Rupiah ELSE 0 END) AS Total_Tunai
+								FROM lalin
+								WHERE waktu >= '2018-07-15T00:00:00' AND waktu < '2018-07-16T00:00:00'
+								GROUP BY Gerbang")->result_array();
 
-		$strQuery = 'Main Query %s %s';
+		$template = 'LaporanHarian.xls';
+		//set absolute path to directory with template files
+	    $templateDir = "./";
+	    //set config for report
+	     $config = array(
+	       'template' => $template,
+	       'templateDir' => $templateDir
+	    );
 
-		if (isset($startdate)) {
-			$where1 = $startdate;
-		} 
+	      //load template
+	      $R = new PHPReport($config);
+	 
+	      $R->load(
+		      	array(
+		              'id' => 'lapHarian',
+		              'repeat' => TRUE,
+		              'data' => $data  
+		    	    ), 
+		      array(
+		      		'id' => 'total',
+		      		'data' => array('eToll' => 1000) 
+		      	)
+		  );
 
-		if (isset($enddate)) {
-			$where2 = $enddate;
-		} 
-		$query = sprintf($strQuery,$where1,$where2);
-		echo $query;
-		
-	}
 
-	public function exp_excel()
-	{
-		$this->load->view('transaction/LaporanHarian/export_excel', '', TRUE);
+	      // define output directoy 
+	      $output_file_dir = "./";
+	      	
+	      $output_file_excel = $output_file_dir  . "LaporanHarian".date('dmYhis').".xlsx";
+	      //download excel sheet with data in /tmp folder
+	      $result = $R->render('excel', $output_file_excel);
+	      force_download($output_file_excel, NULL);		
 	}
 }

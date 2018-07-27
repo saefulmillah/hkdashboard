@@ -22,7 +22,7 @@ class LaporanHarian_model extends CI_Model
                   SUM((CASE WHEN (`lalin`.`Metoda` LIKE '%Tunai%') THEN 1 ELSE 0 END)) AS `Total_Tunai`,
                   SUM((CASE WHEN (`lalin`.`Metoda` LIKE '%eToll%') THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_eToll`,
                   SUM((CASE WHEN (`lalin`.`Metoda` LIKE '%Tunai%') THEN `lalin`.`Rupiah` ELSE 0 END)) AS `Rupiah_Tunai`";
-    var $table = "lalin";
+  var $table = "lalin";
 	var $column_order = array('Gerbang','eToll_shift1','Tunai_shift1','eToll_shift1','Tunai_shift2','eToll_shift2','Tunai_shift3','eToll_shift3','Total_eToll','Total_Tunai','Rupiah_eToll','Rupiah_Tunai');
 	var $column_search = array('Gerbang','eToll_shift1','Tunai_shift1','eToll_shift1','Tunai_shift2','eToll_shift2','Tunai_shift3','eToll_shift3','Total_eToll','Total_Tunai','Rupiah_eToll','Rupiah_Tunai');
 	var $order = array('Gerbang' => 'asc');
@@ -32,6 +32,16 @@ class LaporanHarian_model extends CI_Model
 		parent::__construct();
     $this->dbATP = $this->load->database('atp', TRUE);
 	}
+
+  public function getDataExport($startdate)
+  {
+        $this->dbATP->select($this->select);
+        $this->dbATP->from($this->table);
+        $this->dbATP->where("DATE_FORMAT(`Waktu`,'%Y-%m-%d')", $startdate);
+        $this->dbATP->group_by('Gerbang');
+        $query = $this->dbATP->get();
+        return $query->result_array();
+  }
 
 	private function _get_datatables_query()
 	{

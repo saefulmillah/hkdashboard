@@ -52,7 +52,7 @@ class Overview extends CI_Controller {
 	public function getDataRevenue()
 	{
 		$dbATP = $this->load->database('atp', TRUE);
-		$sql = "CALL sp_calculate_revenue_monthly (4000000000)";
+		$sql = "CALL sp_calculate_revenue_monthly (10000000000)";
 		$query = $dbATP->query($sql)->row();
 
 		echo json_encode($query);

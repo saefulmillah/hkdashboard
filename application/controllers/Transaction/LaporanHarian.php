@@ -96,21 +96,11 @@ class LaporanHarian extends CI_Controller
 	        echo json_encode($output);
 		}
 
-	public function export_excel()
+	public function getExcel()
 	{
+		$startdate = $this->input->post('start_date');
 		$dbATP = $this->load->database('atp', TRUE);
-		$data = $dbATP->query("SELECT Gerbang,  
-									SUM(CASE WHEN Metoda LIKE 'eToll%' AND Shift = 1 THEN Rupiah ELSE 0 END) AS eToll_shift1, 
-									SUM(CASE WHEN Metoda LIKE '%Tunai%' AND Shift = 1 THEN Rupiah ELSE 0 END) AS Tunai_shift1,
-									SUM(CASE WHEN Metoda LIKE 'eToll%' AND Shift = 2 THEN Rupiah ELSE 0 END) AS eToll_shift2, 
-									SUM(CASE WHEN Metoda LIKE '%Tunai%' AND Shift = 2 THEN Rupiah ELSE 0 END) AS Tunai_shift2,
-									SUM(CASE WHEN Metoda LIKE 'eToll%' AND Shift = 3 THEN Rupiah ELSE 0 END) AS eToll_shift3, 
-									SUM(CASE WHEN Metoda LIKE '%Tunai%' AND Shift = 3 THEN Rupiah ELSE 0 END) AS Tunai_shift3,
-									SUM(CASE WHEN Metoda LIKE '%eToll%' THEN Rupiah ELSE 0 END) AS Total_eToll,
-									SUM(CASE WHEN Metoda LIKE '%Tunai%' THEN Rupiah ELSE 0 END) AS Total_Tunai
-								FROM lalin
-								WHERE waktu >= '2018-07-15T00:00:00' AND waktu < '2018-07-16T00:00:00'
-								GROUP BY Gerbang")->result_array();
+		$data = $this->LaporanHarian->getDataExport($startdate);
 
 		$template = 'LaporanHarian.xls';
 		//set absolute path to directory with template files
@@ -120,22 +110,77 @@ class LaporanHarian extends CI_Controller
 	       'template' => $template,
 	       'templateDir' => $templateDir
 	    );
+	    
+	    $total_etoll = 0;
+		$total_tunai = 0;
+		$total_rptunai = 0;
+		$total_rpetoll = 0;
+		$total_tunai_shift1 = 0;
+		$total_etoll_shift1 = 0;
+		$total_rupiah_tunai_shift1 = 0;
+		$total_rupiah_etoll_shift1 = 0;
+		$total_tunai_shift2 = 0;
+		$total_etoll_shift2 = 0;
+		$total_rupiah_tunai_shift2 = 0;
+		$total_rupiah_etoll_shift2 = 0;
+		$total_tunai_shift3 = 0;
+		$total_etoll_shift3 = 0;
+		$total_rupiah_tunai_shift3 = 0;
+		$total_rupiah_etoll_shift3 = 0;
+	     foreach ($data as $row) {
+	     	$total_etoll += $row['Total_eToll'];	
+	     	$total_tunai += $row['Total_Tunai'];	
+	     	$total_rptunai += $row['Rupiah_Tunai'];	
+	     	$total_rpetoll += $row['Rupiah_eToll'];	
+			$total_tunai_shift1 += $row['Tunai_shift1'];
+			$total_etoll_shift1 += $row['eToll_shift1'];
+			$total_rupiah_tunai_shift1 += $row['Rupiah_Tunai_shift1'];
+			$total_rupiah_etoll_shift1 += $row['Rupiah_eToll_shift1'];
+			$total_tunai_shift2 += $row['Tunai_shift2'];
+			$total_etoll_shift2 += $row['eToll_shift2'];
+			$total_rupiah_tunai_shift2 += $row['Rupiah_Tunai_shift2'];
+			$total_rupiah_etoll_shift2 += $row['Rupiah_eToll_shift2'];
+			$total_tunai_shift3 += $row['Tunai_shift3'];
+			$total_etoll_shift3 += $row['eToll_shift3'];
+			$total_rupiah_tunai_shift3 += $row['Rupiah_Tunai_shift3'];
+			$total_rupiah_etoll_shift3 += $row['Rupiah_eToll_shift3'];
+	     }
 
 	      //load template
 	      $R = new PHPReport($config);
-	 
 	      $R->load(
-		      	array(
-		              'id' => 'lapHarian',
-		              'repeat' => TRUE,
-		              'data' => $data  
-		    	    ), 
-		      array(
-		      		'id' => 'total',
-		      		'data' => array('eToll' => 1000) 
-		      	)
+	      			array(
+			      		array(
+				              'id' => 'header',
+				              'data' => array('startdate' => $startdate)
+				    	    ),
+			      		array(
+				              'id' => 'footer',
+				              'data' => array(	'Total_etoll' => $total_etoll, 
+				              				  	'Total_tunai' => $total_tunai, 
+				              				  	'Total_rptunai' => $total_rptunai, 
+				              				  	'Total_rpetoll' => $total_rpetoll,
+				              				  	'Total_Tunai_shift1' => $total_tunai_shift1,
+												'Total_eToll_shift1' => $total_etoll_shift1,
+												'Total_Rupiah_Tunai_shift1' => $total_rupiah_tunai_shift1,
+												'Total_Rupiah_eToll_shift1' => $total_rupiah_etoll_shift1,
+												'Total_Tunai_shift2' => $total_tunai_shift2,
+												'Total_eToll_shift2' => $total_etoll_shift2,
+												'Total_Rupiah_Tunai_shift2' => $total_rupiah_tunai_shift2,
+												'Total_Rupiah_eToll_shift2' => $total_rupiah_etoll_shift2,
+												'Total_Tunai_shift3' => $total_tunai_shift3,
+												'Total_eToll_shift3' => $total_etoll_shift3,
+												'Total_Rupiah_Tunai_shift3' => $total_rupiah_tunai_shift3,
+												'Total_Rupiah_eToll_shift3' => $total_rupiah_etoll_shift3,
+				              				)
+				    	    ),
+				      	array(
+				              'id' => 'detail',
+				              'repeat' => TRUE,
+				              'data' => $data  
+				    	    )
+	      				)
 		  );
-
 
 	      // define output directoy 
 	      $output_file_dir = "./";

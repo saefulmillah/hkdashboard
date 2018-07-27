@@ -3,13 +3,13 @@
 	<div class="row">
 		<div class="col-md-12">
 			<span class="d-block">
-				<form class="form-inline" id="myForm" name="myForm">
+				<form class="form-inline" action="<?=site_url('Transaction/LaporanHarian/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
 				  <div class="form-group mb-2">
 				    <input type="text" name="start_date" id="start_date" class="form-control form-control-sm shadow-sm" placeholder="Start date" autocomplete="off" value="<?=date('Y-m-d')?>">
 				    &nbsp;
-				    <button type="button" class="btn btn-sm btn-success" id="search">Search</button>
+				    <button type="button" class="btn btn-sm btn-success" id="search"><i class="fa fa-search"></i> Search</button>
 				    &nbsp;
-				    <button type="button" class="btn btn-sm btn-success" id="export">Export</button> 
+				    <button type="submit" class="btn btn-sm btn-success" id="export"><i class="fa fa-file-export"></i> Excel</button> 
 				  </div>
 				</form>
 			</span>

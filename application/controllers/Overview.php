@@ -58,6 +58,15 @@ class Overview extends CI_Controller {
 		echo json_encode($query);
 	}
 
+	public function getDataRevenueYearly()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "CALL sp_calculate_revenue_yearly (100000000000)";
+		$query = $dbATP->query($sql)->row();
+
+		echo json_encode($query);
+	}	
+
 	public function getDataMethodRevenue()
 	{
 		$dbATP = $this->load->database('atp', TRUE);
@@ -73,5 +82,16 @@ class Overview extends CI_Controller {
 		$query = $this->db->query($sql)->result_array();
 
 		echo json_encode($query);
+	}
+
+	public function getAccidentLevel()
+	{
+		$sql = "SELECT 
+				tyear, tmonth, delta_days, segment_length, lhr, ROUND(accident_level,2) AS accident_level, max_limit,
+				ROUND((100/max_limit)*100 ,1) AS AccidentPersen
+				FROM v_accident_level_03 WHERE tyear=2018 AND tmonth=DATE_FORMAT(CURDATE(), '%m')";
+		$query = $this->db->query($sql)->row();
+
+		echo json_encode($query);	
 	}
 }

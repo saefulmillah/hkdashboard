@@ -31,6 +31,17 @@ class RekapitulasiLalin_model extends CI_Model
         $this->dbATP = $this->load->database('atp', TRUE);
 	}
 
+    public function getDataExport($startdate, $enddate)
+    {
+        $this->dbATP->select($this->select);
+        $this->dbATP->from($this->table);
+        $this->dbATP->where("DATE_FORMAT(`Tanggal`,'%Y-%m-%d') >=", $startdate);
+        $this->dbATP->where("DATE_FORMAT(`Tanggal`,'%Y-%m-%d') <=", $enddate);
+        $this->dbATP->group_by(array('NoGerbang','Gerbang','NoGardu'));
+        $query = $this->dbATP->get();
+        return $query->result_array();
+    }
+
 	private function _get_datatables_query()
 	{
         //add custom filter here

@@ -60,7 +60,7 @@
 
 .sidebar-nav li {
   text-indent: 20px;
-  line-height: 40px;
+  line-height: 2rem;
 }
 
 .sidebar-nav li a {

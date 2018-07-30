@@ -5,11 +5,20 @@
 			<span class="d-block">
 				<form class="form-inline" id="myForm" name="myForm">
 				  <div class="form-group mb-2">
+				  	<label>Periodesasi</label>
+				  	&nbsp;
+				  	<select class="form-control form-control-sm" name="periodesasi">
+				  		<option>Harian</option>
+				  		<option>Bulanan</option>
+				  	</select>
+				  	&nbsp;
+				  	<label>Date</label>
+				  	&nbsp;
 				    <input type="text" name="start_date" id="start_date" class="form-control form-control-sm shadow-sm" placeholder="Start date" autocomplete="off" value="<?=date('Y-m-d')?>">
 				    &nbsp;
-				    <button type="button" class="btn btn-sm btn-success" id="search">Search</button>
+				    <button type="button" class="btn btn-sm btn-success" id="search"><i class="fa fa-search"></i> Search</button>
 				    &nbsp;
-				    <button type="button" class="btn btn-sm btn-success" id="export">Export</button> 
+				    <button type="submit" class="btn btn-sm btn-success" id="export"><i class="fa fa-file-export"></i> Excel</button> 
 				  </div>
 				</form>
 			</span>
@@ -27,15 +36,6 @@
 	            </thead>
 	            <tbody>
 	            </tbody>
-	 
-	            <tfoot>
-	                <tr>
-	                    <th></th>
-	                    <th></th>
-	                    <th></th>
-	                    <th></th>
-	                </tr>
-	            </tfoot>
 	        </table>
 		</div>		
 	</div>

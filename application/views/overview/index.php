@@ -15,20 +15,36 @@
 			<div class="col-md-8 chart-container">
 				<div>
 					<div id="progress1">
-						<div class="font-roboto" style="font-size: 2rem; font-weight: bold; color:#FF0700; position: absolute; top: 85px; left: 35px; line-height: 1rem; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);">75<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Accident</span></div>
+						<div class="font-roboto" style="text-align: center;font-size: 1.5rem; font-weight: bold; color:#FF0700; position: absolute; top: 32px; left: 38px; line-height: 1rem; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);">
+							<br><span style="font-size: 0.8rem;">Accident Level</span><br><br>
+							<span id="txtAccidentCurrent">0</span> | <span id="txtAccidentLimit">0</span><br>
+						</div>
 					</div>
-					<!-- <div id="progress2" >
-						<div style="font-size: 1.2rem; font-weight: bold; color:#ffb900; position: absolute; top: 65px; left: 55px; line-height: 1rem;">70<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Potholes</span></div>
-					</div> -->
 					<div id="progress3" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
-						<div class="font-roboto" style="font-size: 2rem; font-weight: bold; color:#ffb900; position: absolute; top: 95px; left: 122px; line-height: 1rem;">50<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Potholes</span></div>
+						<div class="font-roboto" style="font-size: 2rem; font-weight: bold; color:#ffb900; position: absolute; top: 136px; left: 89px; line-height: 1rem;">0<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Potholes</span></div>
 					</div>
 					<div id="progress4" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
-						<div class="font-roboto" style="font-size: 3rem; font-weight: thin; color:#3AAACF; position: absolute; top: 83px; left: 65px; line-height: 1.5rem;" ><span id="txtRevenue">0</span><span style="font-size: 1.5rem;">%</span><br><span style="font-size: 1.4rem;">Revenue</span></div>
+						<div class="font-roboto" style="font-size: 2rem; font-weight: thin; color:#3AAACF; position: absolute; top: 61px; left: 39px;">
+							<h2 style="line-height: 1.5rem;"><span id="txtRevenue">0</span><small>%<p style="font-size: 1rem;">Monthly Revenue</p></small></h2>
+							<dl class="row" style="color: #fff; font-size: 0.7rem;">
+							  <dt class="col-sm-3">lalin</dt>
+							  <dd class="col-sm-9" id="txtLalinGear">0</dd>
+							  <dt class="col-sm-3">Rp</dt>
+							  <dd class="col-sm-9" id="txtRevenueGear">0</dd>
+							</dl>
+						</div>
 					</div>
 
 					<div id="progress2" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
-						<div class="font-roboto" style="font-size: 3rem; font-weight: thin; color:#23C700; position: absolute; top: 83px; left: 50px; line-height: 1.5rem;" ><span id="txtSettlement">0</span><span style="font-size: 1.5rem;">%</span><br><span style="font-size: 1.4rem;">Settlement</span></div>
+						<div class="font-roboto" style="font-size: 3rem; font-weight: thin; color:#23C700; position: absolute; top: 65px; left: 32px; line-height: 1rem;" >
+							<h2 style="line-height: 1.5rem;"><span id="txtRevenueYearly">0</span><small>%<p style="font-size: 1rem;">Yearly Revenue</p></small></h2>
+							<dl class="row" style="color: #fff; font-size: 0.7rem;">
+							  <dt class="col-sm-3">lalin</dt>
+							  <dd class="col-sm-9" id="txtLalinGearYearly">0</dd>
+							  <dt class="col-sm-3">Rp</dt>
+							  <dd class="col-sm-9" id="txtRevenueGearYearly">0</dd>
+							</dl>
+						</div>
 					</div>
 
 					<img src="<?=base_url('assets/images/shadow.png')?>" width="500" id="shadow1" style="position: absolute; top: 220px; width: 300px; left: 90px; z-index: -1000;">

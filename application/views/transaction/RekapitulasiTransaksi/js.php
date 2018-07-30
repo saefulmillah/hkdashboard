@@ -16,28 +16,6 @@ var handle_datatables = function () {
                     typeof i === 'number' ?
                         i : 0;
             };
- 
-            // computing column Total of the complete result 
-            var TotalLalin = api
-                .column(2)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            
-            var TotalRupiah = api
-                .column(3)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-
-                
-            // Update footer by showing the total with the reference of the column index 
-        $( api.column( 0 ).footer() ).html('Total');
-            $( api.column( 2 ).footer() ).html(TotalLalin);
-            $( api.column( 3 ).footer() ).html(TotalRupiah);
-            
         },
  
         "processing": true, //Feature control the processing indicator.

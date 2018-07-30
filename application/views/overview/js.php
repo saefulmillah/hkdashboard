@@ -47,29 +47,29 @@ var handle_rtms = function () {
 }
 var handle_progressBar = function () {
 	$('#progress1').circleProgress({
-	    value: 0.6,
+	    value: 0,
 	    size: 205,
 	    thickness:10,
 	    fill: {
 	    	color: ['#ffb900']
 	    }
 	});
-	$('#progress2').circleProgress({
-	    value: 0.9,
-	    size: 225,
-	    thickness:10,
-	    fill: {
-	      gradient: ['#00CC00','#00b744']
-	    }
-	});
-	$('#progress3').circleProgress({
-	    value: 0.8,
-	    size: 225,
-	    thickness:10,
-	    fill: {
-	      color: ['#FF0700']
-	    }
-	});
+	// $('#progress2').circleProgress({
+	//     value: 0.9,
+	//     size: 225,
+	//     thickness:10,
+	//     fill: {
+	//       gradient: ['#00CC00','#00b744']
+	//     }
+	// });
+	// $('#progress3').circleProgress({
+	//     value: 0.62406015,
+	//     size: 225,
+	//     thickness:10,
+	//     fill: {
+	//       color: ['#FF0700']
+	//     }
+	// });
 	// $('#progress4').circleProgress({
 	//     value: 0.4,
 	//     size: 225,
@@ -88,14 +88,36 @@ var handle_revenue = function () {
 		success : function (json) {
 			console.log(json.persen);
 			$('#txtRevenue').text(json.persen);
-			$('#txtTotalPendapatan').text(json.Total_Rupiah);
-			$('#txtTotalLalin').text(json.Total_lalin);
+			$('#txtTotalPendapatan, #txtRevenueGear').text(json.Total_Rupiah);
+			$('#txtTotalLalin, #txtLalinGear').text(json.Total_lalin);
 			$('#progress4').circleProgress({
 			    value: json.persen*0.01,
 			    size: 225,
 			    thickness:10,
 			    fill: {
 			      gradient: ['#06799F','#3AAACF']
+			    }
+			});
+		}
+	})
+}
+
+var handle_revenue_yearly = function () {
+	var str_url = "<?=site_url('Overview/getDataRevenueYearly')?>";
+	$.ajax({
+		url : str_url,
+		dataType: 'json',
+		success : function (json) {
+			console.log(json.persen);
+			$('#txtRevenueYearly').text(json.persen);
+			$('#txtRevenueGearYearly').text(json.Total_Rupiah);
+			$('#txtLalinGearYearly').text(json.Total_lalin);
+			$('#progress2').circleProgress({
+			    value: json.persen*0.01,
+			    size: 225,
+			    thickness:10,
+			    fill: {
+			      gradient: ['#00CC00','#00b744']
 			    }
 			});
 		}
@@ -114,6 +136,27 @@ var handle_method_revenue = function () {
 			$('#txtBCA').text(json.BCA);
 			$('#txtBRI').text(json.BRI);	
 			$('#txtTunai').text(json.Tunai);	
+		}
+	})
+}
+
+var handle_accidentLevel = function () {
+	var str_url = "<?=site_url('Overview/getAccidentLevel')?>";
+	$.ajax({
+		url : str_url,
+		dataType: 'json',
+		success : function (json) {
+			console.log(json);
+			$('#txtAccidentCurrent').text(json.accident_level);
+			$('#txtAccidentLimit').text(json.max_limit);
+			$('#progress3').circleProgress({
+			    value: json.accident_level/json.max_limit,
+			    size: 225,
+			    thickness:10,
+			    fill: {
+			      color: ['#FF0700']
+			    }
+			});
 		}
 	})
 }
@@ -186,7 +229,9 @@ var handle_map = function () {
 $(document).ready(function() {
     handle_progressBar();
     handle_rtms();
+    handle_accidentLevel();
     handle_revenue();
+    handle_revenue_yearly();
     handle_method_revenue();
     // setInterval(function() {
     //    handle_revenue();

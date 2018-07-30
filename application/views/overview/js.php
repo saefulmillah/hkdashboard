@@ -121,16 +121,10 @@ var handle_method_revenue = function () {
 var handle_map = function () {
 	var map;
 	var url = "<?=base_url('/assets/images/')?>"
-	var icon_gate = url+'gate.ico'
-	//Array lokasi CCTV
-	var location_cctv = [
-		['KM 58+400', -6.1479851, 106.9394857],
-		['KM 58+600', -6.1465706, 106.940038],
-		['KM 59+400A', -6.145732, 106.940066],
-		['KM 60+800A', -6.147953, 106.94022],	
-		['KM 61+400A', -6.1260118,106.9285034],	
-
-	];
+	var urlCctv = "<?=site_url('overview/getDataCCTV')?>"
+	var icon_gate = url+'marker2.png'
+	var icon_cctv = url+'cctv.png'
+	
 	//Array lokasi gerbang tol
 	var location_gt = [
 		['GT Kebong Bawang', -6.119516, 106.893372, icon_gate],
@@ -139,7 +133,7 @@ var handle_map = function () {
 		['GT Semper 1', -6.139385, 106.937772, icon_gate],
 	];
 
-	var contentString = '<img src="http://202.154.181.42:2030/mjpg/video.mjpg?resolution=320x240" width="130">';
+	var contentString = '<img src="http://202.154.181.42:2030/mjpg/video.mjpg?resolution=320x240" width="200">';
 
 	//Create Maps
 	map = new google.maps.Map(document.getElementById('ATPmap'), {
@@ -156,26 +150,28 @@ var handle_map = function () {
 	// init variable marker dan index
     var marker, i;
 
-    for (i = 0; i < location_cctv.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(location_cctv[i][1], location_cctv[i][2]),
-        map: map,
-        // icon: location_gt[i][3],
-      });
-      // event click untuk menampilkan info window
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent('<h6>'+location_cctv[i][0]+'</h6>'+contentString);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
+    $.getJSON(urlCctv, function (data) {
+		$.each(data, function (i, data) {
+				marker = new google.maps.Marker({
+		        position: new google.maps.LatLng(data.latitude, data.longitude),
+		        map: map,
+		        icon: icon_cctv,
+		      });
+		      // event click untuk menampilkan info window
+		      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+		        return function() {
+		          infowindow.setContent('<h6>'+data.name+'</h6>'+'<img src="'+data.url+'" width="200">');
+		          infowindow.open(map, marker);
+		        }
+		      })(marker, i));
+		});
+	});
 
     for (i = 0; i < location_gt.length; i++) {  
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(location_gt[i][1], location_gt[i][2]),
         map: map,
-        // icon: location_gt[i][3],
+        icon: location_gt[i][3],
       });
       // event click untuk menampilkan info window
       google.maps.event.addListener(marker, 'click', (function(marker, i) {

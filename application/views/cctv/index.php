@@ -1,15 +1,14 @@
 <div class="container-fluid">
 	<div class="row">
-
-		<div class="card-deck">
-		  <div class="card">
-		    <img class="card-img-top" src="http://202.154.181.42:2300/mjpg/video.mjpg?resolution=320x240" alt="Card image cap">
-		    <div class="card-body">
-		      <h5 class="card-title">GT Kebon Bawang</h5>
-		    </div>
-		  </div>
-		</div>
-
+		<?php 
+		foreach ($cctv as $listCctv) {
+		 	echo '<div class="card border border-bottom-0 w-25">';
+		 		echo '<img class="card-img-top" src="'.$listCctv['url'].'" alt="Card image cap">';
+		 		echo '<div class="card-body">';
+		 			echo '<h5 class="card-title">KM '.$listCctv['name'].'</h5>';
+		 		echo '</div>';
+		 	echo '</div>';
+		 } ?>
 	</div>
 </div>
 

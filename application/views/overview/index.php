@@ -51,7 +51,7 @@
 				  <div class="card-body text-white">
 				  	<div class="row">
 				  		<div class="col-md-6"><strong>Total Lalin</strong><h3><span id="txtTotalLalin">0</span></h3>
-				  			<strong>Total Pendapatan (Rp)</strong><h3><span id="txtTotalPendapatan">0</span></h3></div>
+				  			<strong>Total Pendapatan (Rp)</strong><h4><span id="txtTotalPendapatan">0</span></h4></div>
 				  		<div class="col-md-6">
 				  			<dl class="row">
 				  				<dt class="col-sm-5"><strong">BNI</strong></dt>

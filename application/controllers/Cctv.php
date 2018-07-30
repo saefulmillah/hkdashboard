@@ -36,13 +36,14 @@ class Cctv extends CI_Controller
 			$data = array(
 				'title' => 'CCTV', 
 				'multilevel' => $this->menu->get_menu_for_level($parent=0),
-				'breadcrumb' => 'CCTV'
+				'breadcrumb' => 'CCTV',
+				'cctv' => $this->db->query("SELECT name, latitude, longitude, url, description FROM m_cctv")->result_array(),
 			);
 
 			$layout = array('header' => $this->load->view('layout/_header',  $data, TRUE),
 							'style'  => $this->load->view('cctv/style', '', TRUE),
 							'menu' => $this->load->view('layout/_menu', $data, TRUE),
-							'index'  => $this->load->view('cctv/index', '', TRUE),
+							'index'  => $this->load->view('cctv/index', $data, TRUE),
 							'js' => $this->load->view('cctv/js', '', TRUE), 
 							'footer' => $this->load->view('layout/_footer', '', TRUE),
 							);

@@ -52,7 +52,7 @@ class Overview extends CI_Controller {
 	public function getDataRevenue()
 	{
 		$dbATP = $this->load->database('atp', TRUE);
-		$sql = "CALL sp_calculate_revenue_monthly (10000000000)";
+		$sql = "CALL sp_calculate_revenue_monthly_eoj (20000000000)";
 		$query = $dbATP->query($sql)->row();
 
 		echo json_encode($query);
@@ -61,8 +61,16 @@ class Overview extends CI_Controller {
 	public function getDataMethodRevenue()
 	{
 		$dbATP = $this->load->database('atp', TRUE);
-		$sql = "CALL sp_calculate_method_monthly()";
+		$sql = "CALL sp_calculate_method_monthly_eoj()";
 		$query = $dbATP->query($sql)->row();
+
+		echo json_encode($query);
+	}
+
+	public function getDataCCTV()
+	{
+		$sql = "SELECT * FROM m_cctv WHERE isGT=0";
+		$query = $this->db->query($sql)->result_array();
 
 		echo json_encode($query);
 	}

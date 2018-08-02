@@ -76,9 +76,9 @@ class Overview extends CI_Controller {
 		echo json_encode($query);
 	}
 
-	public function getDataCCTV()
+	public function getDataCCTV($isGT=0)
 	{
-		$sql = "SELECT * FROM m_cctv WHERE isGT=0";
+		$sql = "SELECT * FROM m_cctv WHERE isGT=$isGT";
 		$query = $this->db->query($sql)->result_array();
 
 		echo json_encode($query);

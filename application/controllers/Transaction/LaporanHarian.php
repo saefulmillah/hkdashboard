@@ -66,22 +66,22 @@ class LaporanHarian extends CI_Controller
 	            $row[] = $no;
 	            $row[] = $rekaplalin->tanggal;
 	            $row[] = $rekaplalin->Gerbang;
-	            $row[] = $rekaplalin->eToll_shift1;
 	            $row[] = $rekaplalin->Tunai_shift1;
-	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift1,2,",",".");
+	            $row[] = $rekaplalin->eToll_shift1;
 	            $row[] = number_format($rekaplalin->Rupiah_Tunai_shift1,2,",",".");
-	            $row[] = $rekaplalin->eToll_shift2;
+	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift1,2,",",".");
 	            $row[] = $rekaplalin->Tunai_shift2;
-	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift2,2,",",".");
+	            $row[] = $rekaplalin->eToll_shift2;
 	            $row[] = number_format($rekaplalin->Rupiah_Tunai_shift2,2,",",".");
-	            $row[] = $rekaplalin->eToll_shift3;
+	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift2,2,",",".");
 	            $row[] = $rekaplalin->Tunai_shift3;
-	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift3,2,",",".");
+	            $row[] = $rekaplalin->eToll_shift3;
 	            $row[] = number_format($rekaplalin->Rupiah_Tunai_shift3,2,",",".");
-	            $row[] = $rekaplalin->Total_eToll;
+	            $row[] = number_format($rekaplalin->Rupiah_eToll_shift3,2,",",".");
 	            $row[] = $rekaplalin->Total_Tunai;
-	            $row[] = number_format($rekaplalin->Rupiah_eToll,2,",",".");
+	            $row[] = $rekaplalin->Total_eToll;
 	            $row[] = number_format($rekaplalin->Rupiah_Tunai,2,",",".");
+	            $row[] = number_format($rekaplalin->Rupiah_eToll,2,",",".");
 	 
 	            $data[] = $row;
 	        }

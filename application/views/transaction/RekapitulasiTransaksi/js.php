@@ -6,17 +6,17 @@ var handle_datatables = function () {
     //datatables
     table = $('#table').DataTable({ 
 
-        "footerCallback": function ( row, data, start, end, display ) {
-            var api = this.api(), data;
+        // "footerCallback": function ( row, data, start, end, display ) {
+        //     var api = this.api(), data;
  
-            // converting to interger to find total
-            var intVal = function ( i ) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,.]/g, '')*1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
-        },
+        //     // converting to interger to find total
+        //     var intVal = function ( i ) {
+        //         return typeof i === 'string' ?
+        //             i.replace(/[\$,.]/g, '')*1 :
+        //             typeof i === 'number' ?
+        //                 i : 0;
+        //     };
+        // },
  
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.

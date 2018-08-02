@@ -149,6 +149,11 @@ var handle_accidentLevel = function () {
 			console.log(json);
 			$('#txtAccidentCurrent').text(json.accident_level);
 			$('#txtAccidentLimit').text(json.max_limit);
+			if (json.accident_level==null) {
+				$('#txtAccidentCurrent').text('0.00');
+			} else {
+				$('#txtAccidentCurrent').text(json.max_limit);
+			}
 			$('#progress3').circleProgress({
 			    value: json.accident_level/json.max_limit,
 			    size: 225,
@@ -164,7 +169,8 @@ var handle_accidentLevel = function () {
 var handle_map = function () {
 	var map;
 	var url = "<?=base_url('/assets/images/')?>"
-	var urlCctv = "<?=site_url('overview/getDataCCTV')?>"
+	var urlCctv = "<?=site_url('overview/getDataCCTV/0')?>"
+	var urlCctvGT = "<?=site_url('overview/getDataCCTV/1')?>"
 	var icon_gate = url+'marker2.png'
 	var icon_cctv = url+'cctv.png'
 	
@@ -210,20 +216,37 @@ var handle_map = function () {
 		});
 	});
 
-    for (i = 0; i < location_gt.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(location_gt[i][1], location_gt[i][2]),
-        map: map,
-        icon: location_gt[i][3],
-      });
-      // event click untuk menampilkan info window
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent('<h6>'+location_gt[i][0]+'</h6>'+contentString);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
+	$.getJSON(urlCctvGT, function (data) {
+		$.each(data, function (i, data) {
+				marker = new google.maps.Marker({
+		        position: new google.maps.LatLng(data.latitude, data.longitude),
+		        map: map,
+		        icon: icon_gate,
+		      });
+		      // event click untuk menampilkan info window
+		      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+		        return function() {
+		          infowindow.setContent('<h6>'+data.name+'</h6>'+'<img src="'+data.url+'" width="200">');
+		          infowindow.open(map, marker);
+		        }
+		      })(marker, i));
+		});
+	});
+
+    // for (i = 0; i < location_gt.length; i++) {  
+    //   marker = new google.maps.Marker({
+    //     position: new google.maps.LatLng(location_gt[i][1], location_gt[i][2]),
+    //     map: map,
+    //     icon: location_gt[i][3],
+    //   });
+    //   // event click untuk menampilkan info window
+    //   google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    //     return function() {
+    //       infowindow.setContent('<h6>'+location_gt[i][0]+'</h6>'+contentString);
+    //       infowindow.open(map, marker);
+    //     }
+    //   })(marker, i));
+    // }
 }
 	
 $(document).ready(function() {
@@ -233,10 +256,12 @@ $(document).ready(function() {
     handle_revenue();
     handle_revenue_yearly();
     handle_method_revenue();
-    // setInterval(function() {
-    //    handle_revenue();
-    // 	handle_method_revenue();
-    // }, 10000);
+    setInterval(function() {
+        handle_accidentLevel();
+	    handle_revenue();
+	    handle_revenue_yearly();
+	    handle_method_revenue();
+    }, 10000);
     // handle_chart();
 });		
 </script>

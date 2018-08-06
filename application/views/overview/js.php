@@ -1,5 +1,5 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYyTslZ7iqZ_IVXWWHzyaESvkHYKewW7Y&callback=handle_map" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9sDCHodLbslK52zA9A4RaCg9yInOUA7s&callback=handle_map" async defer></script>
 <script type="text/javascript">
 var handle_rtms = function () {
 	// Load the Visualization API and the corechart package.
@@ -182,8 +182,6 @@ var handle_map = function () {
 		['GT Semper 1', -6.139385, 106.937772, icon_gate],
 	];
 
-	var contentString = '<img src="http://202.154.181.42:2030/mjpg/video.mjpg?resolution=320x240" width="200">';
-
 	//Create Maps
 	map = new google.maps.Map(document.getElementById('ATPmap'), {
 	  center: {lat: -6.1182356, lng: 106.9084457},
@@ -232,21 +230,6 @@ var handle_map = function () {
 		      })(marker, i));
 		});
 	});
-
-    // for (i = 0; i < location_gt.length; i++) {  
-    //   marker = new google.maps.Marker({
-    //     position: new google.maps.LatLng(location_gt[i][1], location_gt[i][2]),
-    //     map: map,
-    //     icon: location_gt[i][3],
-    //   });
-    //   // event click untuk menampilkan info window
-    //   google.maps.event.addListener(marker, 'click', (function(marker, i) {
-    //     return function() {
-    //       infowindow.setContent('<h6>'+location_gt[i][0]+'</h6>'+contentString);
-    //       infowindow.open(map, marker);
-    //     }
-    //   })(marker, i));
-    // }
 }
 	
 $(document).ready(function() {

@@ -4,10 +4,13 @@
  */
 class RekapitulasiTransaksi_model extends CI_Model
 {
-	var $table = 'v_rekapitulasi_transaksi';
+	var $select = 'Gerbang,
+                    SUM(RpBNI+RpMandiri+RpBCA+RpBRI+RpTunai) AS Total_Rupiah,
+                    SUM(BNI+Mandiri+BCA+BRI+Tunai) AS Total_lalin';
+    var $table = 'eoj';
 	var $column_order = array('Gerbang','Total_lalin','Total_Rupiah');
 	var $column_search = array('Gerbang','Total_lalin','Total_Rupiah');
-	var $order = array('Gerbang' => 'asc');
+	var $order = array('Gerbang' => 'ASC');
 
 	public function __construct()
 	{
@@ -15,9 +18,31 @@ class RekapitulasiTransaksi_model extends CI_Model
         $this->dbATP = $this->load->database('atp', TRUE);
 	}
 
+    public function getDataExport($startdate)
+    {
+        $this->dbATP->select($this->select);
+        $this->dbATP->from($this->table);
+        $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d')", $startdate);
+        $this->dbATP->group_by('Gerbang');
+        $query = $this->dbATP->get();
+        return $query->result_array();
+    }
+
 	private function _get_datatables_query()
 	{
-		$this->dbATP->from($this->table);
+		//add custom filter here
+        if($this->input->post('periodesasi')=='harian')
+        {
+            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d')", $this->input->post('daily'));
+        } else if ($this->input->post('periodesasi')=='bulanan') {
+            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%c')", $this->input->post('monthly'));
+        } else {
+            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d') >= CURDATE()");
+        }
+
+        $this->dbATP->select($this->select);
+        $this->dbATP->from($this->table);
+        $this->dbATP->group_by('Gerbang');
  
         $i = 0;
      

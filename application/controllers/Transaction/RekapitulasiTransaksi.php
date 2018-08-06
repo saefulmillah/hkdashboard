@@ -61,8 +61,8 @@ class RekapitulasiTransaksi extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $rekaptrans->Gerbang;
-            $row[] = $rekaptrans->Total_lalin;
-            $row[] = number_format($rekaptrans->Total_Rupiah,2,",",".");
+            $row[] = number_format($rekaptrans->Total_lalin,0,",",".");
+            $row[] = number_format($rekaptrans->Total_Rupiah,0,",",".");
  
             $data[] = $row;
         }
@@ -75,5 +75,28 @@ class RekapitulasiTransaksi extends CI_Controller
                 );
         //output to json format
         echo json_encode($output);
+	}
+
+	public function getBulanTahun($tipe = 0)
+	{
+		$date = $this->db->query("SELECT * FROM master_time WHERE Tahun=2018")->result_array();
+		$html = '';
+		if ($tipe==1) {
+			$html .= '<label>Tahun</label>&nbsp;';
+			$html .= '<select class="form-control form-control-sm" name="tahun" id="tahun">';
+			$html .= '<option value="2018">2018</option>';
+			$html .= '</select>&nbsp;';
+			$html .= '<label>Bulan</label>&nbsp;';
+			$html .= '<select class="form-control form-control-sm" name="bulan" id="bulan">';
+			foreach ($date as $rowdate) {
+				$html .= '<option value="'.$rowdate['Bulan'].'">'.$rowdate['Bulan'].'</option>';
+			}
+			$html .= '</select>';
+		} else {
+			$html .= '&nbsp;<label>Date</label>';
+		  	$html .= '&nbsp;<input type="text" name="start_date" id="start_date" class="form-control form-control-sm shadow-sm" placeholder="Start date" autocomplete="off" value="'.date('Y-m-d').'">';
+		}
+
+		echo $html;
 	}
 }

@@ -14,6 +14,7 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         $('#menu-toggle').toggleClass('rotated');
+        $('#hk-navbar').removeClass("d-none");
     });
 
     $(".nav .parent li").on("click", function() {

@@ -36,7 +36,8 @@ class Grafik24Jam extends CI_Controller
 		$data = array(
 			'title' => 'Transaction', 
 			'multilevel' => $this->menu->get_menu_for_level($parent=0),
-			'breadcrumb' => 'Transaksi > Comparison'
+			'breadcrumb' => 'Transaksi > Comparison',
+			'gerbang' => $this->db->query("SELECT id, name, code FROM m_toll_gate ORDER by name ASC")->result_array(),
 		);
 
 		$layout = array('header' => $this->load->view('layout/_header',  $data, TRUE),
@@ -53,6 +54,13 @@ class Grafik24Jam extends CI_Controller
 	public function getData24Jam()
 	{
 		$dbATP = $this->load->database('atp', TRUE);
+		if (!empty($this->input->post('gerbang'))) {
+			$gerbang = $this->input->post('gerbang');
+			$cond1 = "AND GERBANG='$gerbang'";
+		} else {
+			$cond1 = "";
+		}
+		
 		$sql = "SELECT DATE_ADD(x1.day, INTERVAL x1.hour HOUR) TIMESTAMP, x1.*
 				FROM
 				(
@@ -64,14 +72,17 @@ class Grafik24Jam extends CI_Controller
 						SUM(CASE WHEN metoda <> 'Tunai/Umum' THEN rupiah ELSE 0 END) non_cash_revenue,
 						SUM(rupiah) total_revenue
 					FROM lalin
-					WHERE 
-					waktu > DATE_SUB(NOW(), INTERVAL 1 DAY) 
+					WHERE 1=1
+					%s
+					AND waktu > DATE_SUB(NOW(), INTERVAL 1 DAY) 
 					GROUP BY DAY, HOUR
 					ORDER BY DAY, HOUR
 				) x1;";
+		
+		$strSql = sprintf($sql, $cond1);
 
-		$query = $dbATP->query($sql)->result_array();
-
+		$query = $dbATP->query($strSql)->result_array();
+		// echo $dbATP->last_query();
 		$data = array(
 			'series' => $query,
 			);

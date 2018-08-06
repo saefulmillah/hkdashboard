@@ -5,6 +5,8 @@
 			<span class="d-block">
 				<form class="form-inline" action="<?=site_url('Transaction/LaporanHarian/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
 				  <div class="form-group mb-2">
+				  	<label>Start</label>
+				  	&nbsp;
 				    <input type="text" name="start_date" id="start_date" class="form-control form-control-sm shadow-sm" placeholder="Start date" autocomplete="off" value="<?=date('Y-m-d')?>">
 				    &nbsp;
 				    <button type="button" class="btn btn-sm btn-success" id="search"><i class="fa fa-search"></i> Search</button>
@@ -48,6 +50,27 @@
 				</thead>
 				<tbody>
 				</tbody>
+				<tfoot>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tfoot>
 			</table>
 		</div>		
 	</div>

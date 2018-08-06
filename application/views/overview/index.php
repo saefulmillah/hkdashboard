@@ -63,7 +63,7 @@
 			<div class="col-md-4 chart-container bg-dark-blue3" style="position: absolute;right:0px; top: -5px; -webkit-box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);-moz-box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);box-shadow: inset 10px 0px 7px -6px rgba(0,0,0,1);">	
 				
 				<div class="card border border-primary bg-dark-blue2">
-				  <h6 class="card-header font-roboto text-white bg-dark-blue2 rounded-top">Revenue per <?=date('F')." '".date('d')?></h6>
+				  <h6 class="card-header font-roboto text-white bg-dark-blue2 rounded-top">Revenue 01 - <?=date('d').' '.date('F')." '".date('y')?></h6>
 				  <div class="card-body text-white">
 				  	<div class="row">
 				  		<div class="col-md-6"><strong>Total Lalin</strong><h3><span id="txtTotalLalin">0</span></h3>

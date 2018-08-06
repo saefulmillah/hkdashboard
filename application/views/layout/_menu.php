@@ -71,7 +71,7 @@
                 </ul>
             </ul>
         </div>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" id="hk-navbar">
           <a class="navbar-brand" href="#">
             <img src="<?=base_url('assets/images/hk_logo.png')?>" height="40" class="d-inline-block align-top" alt="">
             &nbsp;&nbsp;&nbsp;

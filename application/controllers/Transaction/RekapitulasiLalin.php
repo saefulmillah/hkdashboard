@@ -63,17 +63,17 @@ class RekapitulasiLalin extends CI_Controller
             $row[] = $rekaplalin->gerbang;
             $row[] = $rekaplalin->nogardu;
             $row[] = $rekaplalin->lalin1;
-            $row[] = number_format($rekaplalin->rp1,2,",",".");
+            $row[] = number_format($rekaplalin->rp1,0,",",".");
             $row[] = $rekaplalin->lalin2;
-            $row[] = number_format($rekaplalin->rp2,2,",",".");
+            $row[] = number_format($rekaplalin->rp2,0,",",".");
             $row[] = $rekaplalin->lalin3;
-            $row[] = number_format($rekaplalin->rp3,2,",",".");
+            $row[] = number_format($rekaplalin->rp3,0,",",".");
             $row[] = $rekaplalin->lalin4;
-            $row[] = number_format($rekaplalin->rp4,2,",",".");
+            $row[] = number_format($rekaplalin->rp4,0,",",".");
             $row[] = $rekaplalin->lalin5;
-            $row[] = number_format($rekaplalin->rp5,2,",",".");
+            $row[] = number_format($rekaplalin->rp5,0,",",".");
             $row[] = $rekaplalin->total;
-            $row[] = number_format($rekaplalin->rptotal,2,",",".");
+            $row[] = number_format($rekaplalin->rptotal,0,",",".");
  
             $data[] = $row;
         }

@@ -36,13 +36,15 @@ class GrafikHarian extends CI_Controller
 		$data = array(
 			'title' => 'Grafik Harian', 
 			'multilevel' => $this->menu->get_menu_for_level($parent=0),
-			'breadcrumb' => 'Transaksi > Grafik Harian'
+			'breadcrumb' => 'Transaksi > Grafik Harian',
+			'gerbang' => $this->db->query("SELECT id, name, code FROM m_toll_gate ORDER by name ASC")->result_array(),
+			'bulan' => $this->db->query("SELECT * FROM master_time WHERE Tahun=2018")->result_array(),
 		);
 
 		$layout = array('header' => $this->load->view('layout/_header',  $data, TRUE),
 						'style'  => $this->load->view('transaction/GrafikHarian/style', '', TRUE),
 						'menu' => $this->load->view('layout/_menu', $data, TRUE),
-						'index'  => $this->load->view('transaction/GrafikHarian/index', '', TRUE),
+						'index'  => $this->load->view('transaction/GrafikHarian/index', $data, TRUE),
 						'js' => $this->load->view('transaction/GrafikHarian/js', '', TRUE), 
 						'footer' => $this->load->view('layout/_footer', '', TRUE),
 						);
@@ -53,6 +55,17 @@ class GrafikHarian extends CI_Controller
 	public function getDataHarian()
 	{
 		$dbATP = $this->load->database('atp', TRUE);
+		$strWhere = '';
+		if (!empty($this->input->post('gerbang'))) {
+			$bulan = $this->input->post('bulan');
+			$gerbang = $this->input->post('gerbang');
+			$strWhere .= "AND GERBANG='$gerbang' ";
+			$strWhere .= "AND DATE_FORMAT(waktu, '%m')=$bulan ";
+		} else {
+			$bulan = $this->input->post('bulan');
+			$strWhere .= "AND DATE_FORMAT(waktu, '%m')=$bulan ";
+		}
+
 		$sql = "SELECT x1.*
 				FROM
 				(
@@ -64,13 +77,15 @@ class GrafikHarian extends CI_Controller
 						SUM(CASE WHEN metoda <> 'Tunai/Umum' THEN rupiah ELSE 0 END) non_cash_revenue,
 						SUM(rupiah) total_revenue
 					FROM lalin
-					WHERE 
-					DATE_FORMAT(waktu, '%m')=DATE_FORMAT(CURDATE(), '%m')
+					WHERE 1=1
+					%s
 					GROUP BY DAY
 					ORDER BY DAY
 				) x1;";
 
-		$query = $dbATP->query($sql)->result_array();
+		$strSql = sprintf($sql, $strWhere);
+
+		$query = $dbATP->query($strSql)->result_array();
 
 		$data = array(
 			'series' => $query,

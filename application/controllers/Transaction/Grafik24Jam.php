@@ -61,7 +61,7 @@ class Grafik24Jam extends CI_Controller
 			$cond1 = "";
 		}
 		
-		$sql = "SELECT DATE_ADD(x1.day, INTERVAL x1.hour HOUR) TIMESTAMP, x1.*
+		$sql = "SELECT DATE_FORMAT(DATE_ADD(x1.day, INTERVAL x1.hour HOUR), '%%h:%%i-%%h:59') TIMESTAMP, x1.*
 				FROM
 				(
 				    SELECT DATE(waktu) DAY, HOUR(waktu) HOUR, 

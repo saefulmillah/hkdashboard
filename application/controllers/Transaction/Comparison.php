@@ -88,11 +88,7 @@ class Comparison extends CI_Controller
 				lalin
 				WHERE waktu >= 
 						(
-							SELECT 
-							CASE 
-							  WHEN (CAST(HOUR(NOW()) AS SIGNED) >= 7)  THEN DATE_ADD(CURRENT_DATE(),INTERVAL 7 HOUR)
-							  ELSE DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY),INTERVAL 7 HOUR) 
-							  END start_time
+							DATE_FORMAT(CURDATE(), '%Y-%m-%d')
 						) 
 				GROUP BY Gerbang
 				ORDER BY Gerbang";

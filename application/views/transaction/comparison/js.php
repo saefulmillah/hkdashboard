@@ -1,7 +1,6 @@
 <script src="<?=base_url('assets/js/highcharts.js')?>"></script>
 <script type="text/javascript">
  
-var table;
 var handle_lalinAntarGerbang = function () {
     var url = "<?=site_url('Transaction/comparison/getDataLalinAntarGerbang')?>";
     // Build the chart
@@ -18,7 +17,7 @@ var handle_lalinAntarGerbang = function () {
                             plotBackgroundColor: null,
                             plotBorderWidth: null,
                             plotShadow: false,
-                            type: 'pie'
+                            type: 'pie',
                         },
                         title: {
                             text: 'Perbandingan Lalin Antar Gerbang (HARI INI)'
@@ -31,9 +30,14 @@ var handle_lalinAntarGerbang = function () {
                                 allowPointSelect: true,
                                 cursor: 'pointer',
                                 dataLabels: {
-                                    enabled: false
+                                    enabled: true,
+                                    format: '{point.y:,.0f}',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    }
                                 },
-                                showInLegend: true
+                                showInLegend: true,
+                                
                             }
                         },
                         series: [{
@@ -75,9 +79,20 @@ var handle_pendapatanAntarGerbang = function () {
                                 allowPointSelect: true,
                                 cursor: 'pointer',
                                 dataLabels: {
-                                    enabled: false
+                                    enabled: true,
+                                    format: '{point.y:,.0f}',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    }
                                 },
-                                showInLegend: true
+                                showInLegend: true,
+                                point: {
+                                    events: {
+                                        click: function() {
+                                            alert ('Category: '+ this.name +', value: '+ this.y);
+                                        }
+                                    }
+                                }
                             }
                         },
                         series: [{
@@ -120,7 +135,11 @@ var handle_comparisonMethodPayment = function () {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        format: '{point.y:,.0f}',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
                     },
                     showInLegend: true
                 }
@@ -163,7 +182,11 @@ var handle_NoTranALRantarGerbang = function () {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        format: '{point.y:,.0f}',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
                     },
                     showInLegend: true
                 }
@@ -206,7 +229,7 @@ var handle_NoTranLSBantarGerbang = function () {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: false,
                     },
                     showInLegend: true
                 }
@@ -258,7 +281,11 @@ var handle_LalinAntarGolongan = function () {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        format: '{point.y:,.0f}',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
                     },
                     showInLegend: true
                 }
@@ -270,6 +297,18 @@ var handle_LalinAntarGolongan = function () {
             }]
         }); 
     });
+}
+
+var handle_addCommas = function (nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
 }
 
 

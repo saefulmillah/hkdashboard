@@ -65,10 +65,16 @@ var handle_map = function () {
 		      })(marker, i));
 		});
 	});
+}
+
+var handle_zoom = function (_src) {
+	// alert(_src);
+	$('#main-cctv').html('<img class="img-fluid" src="'+_src+'" alt="Card image cap" width="100%" height="100%">');
 }	
 $(document).ready(function() {
     $("#wrapper").removeClass("toggled");
     $('#hk-navbar').toggleClass("d-none");
     handle_map();
+    // handle_zoom();
 });
 </script>

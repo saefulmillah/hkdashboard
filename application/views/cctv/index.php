@@ -3,7 +3,7 @@
 		<div class="col-md-4">
 			<?php 
 				foreach ($cctv as $listCctv) {
-					if ($listCctv['id']==1) {
+					if ($listCctv['id']==26) {
 							echo '<div class="card border border-bottom-0" id="main-cctv">';
 						 		echo '<img class="img-fluid" src="'.$listCctv['url'].'" alt="Card image cap" width="100%" height="100%">';
 						 	echo '</div>';
@@ -60,7 +60,7 @@
 			<?php 
 				echo '<div class="card-group">';
 					foreach ($cctv as $listCctv4) {
-						if ($listCctv4['id'] >=21 AND $listCctv4['id'] <= 26) {
+						if ($listCctv4['id'] >=21 AND $listCctv4['id'] <= 25) {
 								echo '<div class="card border border-bottom-0 w-25">';
 							 		echo '<img class="card-img-top" src="'.$listCctv4['url'].'" onclick="handle_zoom(this.src)" alt="Card image cap">';
 							 	echo '</div>';

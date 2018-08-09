@@ -21,8 +21,8 @@
         body {
           /*height: 768px;*/
           overflow: hidden;
-          background-position: 0px -350px;
-          background-image: url(<?=base_url('assets/images/bg8.jpg')?>);
+          /*background-position: 0px -350px;*/
+          background-image: url(<?=base_url('assets/images/bg3.jpg')?>);
           /*background-position: 0px -30px;
           background-image: url(<?//=base_url('assets/images/bg13.jpg')?>);*/
           background-size: cover;

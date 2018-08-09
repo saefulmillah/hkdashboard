@@ -16,12 +16,12 @@ var handle_grafikTingkatKecelakaan = function () {
                  
                     // draw chart
                     $('#GrafikTingkatKecelakaan').highcharts({
-                        chart: {
-                            zoomType: 'xy'
-                        },
                         credits:{enabled:false},
                         title: {
-                            text: 'Lalin dan Pendapatan Tahunan'
+                            text: 'Grafik Tingkat Kecelakaan'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.y:,.2f}</b>'
                         },
                         xAxis: [{
                             categories: timestamp_json, // FILL THIS
@@ -35,37 +35,17 @@ var handle_grafikTingkatKecelakaan = function () {
                                 }
                             },
                             title: {
-                                text: 'Lalin',
+                                text: 'Rate',
                                 style: {
                                     color: Highcharts.getOptions().colors[0]
                                 }
                             },
-                            floor:0
                         }],
-                        tooltip: {
-                            shared: true
-                        },
-                        plotOptions: {
-                            column: {
-                                stacking: 'normal',
-                                dataLabels: {
-                                    enabled: false,
-                                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
-                                }
-                            }
-                        }, 
-                        series: [
-                                    {
+                        series: [{
                                          name: 'Lalin. Total',
-                                         yAxis: 0,
                                          type: 'column',
                                          data: accidentlevel_json, // FILL THIS
-                                         lineWidth: 0,
-                                         tooltip: {}
-                                    }
-
-
-                                ]
+                                }]
                     }); 
                 });          
 

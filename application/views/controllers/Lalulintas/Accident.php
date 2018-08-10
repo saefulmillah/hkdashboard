@@ -74,9 +74,7 @@ class Accident extends CI_Controller
 	{
 		$dataPost = array(
 							'event_time' => $this->input->post('event_time').' '.$this->input->post('event_time_hour').':'.$this->input->post('event_time_minute'),
-							'sta' => $this->input->post('sta_km').'+'.$this->input->post('sta_m'),
-							'sta_km' => $this->input->post('sta_km'),
-							'sta_m' => $this->input->post('sta_m'),
+							'sta' => $this->input->post('lokasi_sta'),
 							'lane' => $this->input->post('jalur'),
 							'position_id' => $this->input->post('posisi'),
 							'weather_id' => $this->input->post('cuaca'),

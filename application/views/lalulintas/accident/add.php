@@ -16,8 +16,11 @@
 	  
 	  <div class="form-group row">
 	    <label for="lokasi_sta" class="col-sm-4 col-form-label">Lokasi (STA)</label>
-	    <div class="col-sm-8">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="lokasi_sta" name="lokasi_sta" placeholder="Input Lokasi (STA)...">
+	    <div class="col-sm-2">
+	      <input type="number" class="form-control form-control-sm" autocomplete="off" id="sta_km" name="sta_km" placeholder="KM">
+	    </div>
+	    <div class="col-sm-6">
+	      <input type="number" class="form-control form-control-sm" autocomplete="off" id="sta_m" name="sta_m" placeholder="Meter">
 	    </div>
 	  </div>
 	  

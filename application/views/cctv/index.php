@@ -17,7 +17,7 @@
 				echo '<div class="card-group">';
 					foreach ($cctv as $listCctv1) {
 						if ($listCctv1['id'] >=1 AND $listCctv1['id'] <= 5) {
-								echo '<div class="card border border-bottom-0 w-25">';
+								echo '<div class="card border w-25" id="cctv_'.$listCctv1['id'].'">';
 							 		echo '<img class="card-img-top" src="'.$listCctv1['url'].'" onclick="handle_zoom(this.src)" alt="Card image cap">';
 							 	echo '</div>';
 						}
@@ -28,7 +28,7 @@
 				echo '<div class="card-group">';
 					foreach ($cctv as $listCctv2) {
 						if ($listCctv2['id'] >=6 AND $listCctv2['id'] <= 10) {
-								echo '<div class="card border border-bottom-0 w-25">';
+								echo '<div class="card border w-25" id="cctv_'.$listCctv2['id'].'">';
 							 		echo '<img class="card-img-top" src="'.$listCctv2['url'].'" onclick="handle_zoom(this.src)" alt="Card image cap">';
 							 	echo '</div>';
 						}
@@ -39,7 +39,7 @@
 				echo '<div class="card-group">';
 					foreach ($cctv as $listCctv3) {
 						if ($listCctv3['id'] >=11 AND $listCctv3['id'] <= 15) {
-								echo '<div class="card border border-bottom-0 w-25">';
+								echo '<div class="card border w-25" id="cctv_'.$listCctv3['id'].'">';
 							 		echo '<img class="card-img-top" src="'.$listCctv3['url'].'" onclick="handle_zoom(this.src)" alt="Card image cap">';
 							 	echo '</div>';
 						}
@@ -50,7 +50,7 @@
 				echo '<div class="card-group">';
 					foreach ($cctv as $listCctv4) {
 						if ($listCctv4['id'] >=16 AND $listCctv4['id'] <= 20) {
-								echo '<div class="card border border-bottom-0 w-25">';
+								echo '<div class="card border w-25" id="cctv_'.$listCctv4['id'].'">';
 							 		echo '<img class="card-img-top" src="'.$listCctv4['url'].'" onclick="handle_zoom(this.src)" alt="Card image cap">';
 							 	echo '</div>';
 						}
@@ -59,10 +59,10 @@
 			?>
 			<?php 
 				echo '<div class="card-group">';
-					foreach ($cctv as $listCctv4) {
-						if ($listCctv4['id'] >=21 AND $listCctv4['id'] <= 25) {
-								echo '<div class="card border border-bottom-0 w-25">';
-							 		echo '<img class="card-img-top" src="'.$listCctv4['url'].'" onclick="handle_zoom(this.src)" alt="Card image cap">';
+					foreach ($cctv as $listCctv5) {
+						if ($listCctv5['id'] >=21 AND $listCctv5['id'] <= 25) {
+								echo '<div class="card border w-25" id="cctv_'.$listCctv5['id'].'">';
+							 		echo '<img class="card-img-top" src="'.$listCctv5['url'].'" onclick="handle_zoom(this.src)" alt="Card image cap">';
 							 	echo '</div>';
 						}
 					 } 

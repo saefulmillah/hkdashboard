@@ -19,12 +19,12 @@
 
 #progress1
 {
-    /*height: 300px;
-    width: 300px;*/
+    height: 222px;
+    width: 222px;
     z-index: 1000;
     position: absolute;
-    top: 121px;
-    left: 140px;
+    top: 110px;
+    left: 130px;
 }
 
 #progress2
@@ -39,7 +39,7 @@
 
 #progress3
 {
-    height: 225px;
+    /*height: 225px;*/
     /*width: 300px;*/
     z-index: -1;
     position: absolute;

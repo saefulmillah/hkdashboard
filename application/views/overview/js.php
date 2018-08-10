@@ -46,14 +46,14 @@ var handle_rtms = function () {
   }
 }
 var handle_progressBar = function () {
-	$('#progress1').circleProgress({
-	    value: 0,
-	    size: 205,
-	    thickness:10,
-	    fill: {
-	    	color: ['#ffb900']
-	    }
-	});
+	// $('#progress1').circleProgress({
+	//     value: 10,
+	//     size: 225,
+	//     thickness:10,
+	//     fill: {
+	//     	color: ['#ffb900']
+	//     }
+	// });
 	// $('#progress2').circleProgress({
 	//     value: 0.9,
 	//     size: 225,
@@ -78,6 +78,20 @@ var handle_progressBar = function () {
 	//       gradient: ['#06799F','#3AAACF']
 	//     }
 	// });
+}
+
+var handle_revenue_daily = function () {
+	var str_url = "<?=site_url('Overview/getDataRevenueDaily')?>";
+	$.ajax({
+		url : str_url,
+		dataType: 'json',
+		success : function (json) {
+			// console.log(json.persen);
+			// $('#txtRevenueDaily').text(json.persen);
+			$('#txtRevenueGearDaily').text(json.Total_Rupiah);
+			$('#txtLalinGearDaily').text(json.Total_lalin);
+		}
+	})
 }
 
 var handle_revenue = function () {

@@ -71,10 +71,22 @@ var handle_zoom = function (_src) {
 	// alert(_src);
 	$('#main-cctv').html('<img class="img-fluid" src="'+_src+'" alt="Card image cap" width="100%" height="100%">');
 }	
+
+var handle_blinkCCTV = function () {
+	var urlBlinkCCTV = "<?=site_url('Cctv/getBlinkCCTV')?>"
+	$.getJSON(urlBlinkCCTV, function (data) {
+		$.each(data, function (i, data) {
+			console.log(data.id);
+			// $('#cctv_'+data.id).css({'border':'1px solid red'});
+			$('#cctv_'+data.id).removeClass('border');
+			$('#cctv_'+data.id).addClass('blink');
+		})
+	})
+}
 $(document).ready(function() {
     $("#wrapper").removeClass("toggled");
     $('#hk-navbar').toggleClass("d-none");
-    handle_map();
+    handle_blinkCCTV();
     // handle_zoom();
 });
 </script>

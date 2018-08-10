@@ -49,6 +49,21 @@ class Overview extends CI_Controller {
 		$this->load->view('layout/overview/_overview_main', $layout);
 	}
 
+	public function getDataRevenueDaily()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$sql = "SELECT (CASE WHEN Total_Rupiah IS NULL THEN 0 ELSE Total_Rupiah END) AS Total_Rupiah,
+				       (CASE WHEN Total_lalin IS NULL THEN 0 ELSE Total_lalin END) AS Total_lalin
+				FROM	
+					(SELECT  FORMAT(SUM(RpBNI+RpMandiri+RpBCA+RpBRI+RpTunai),0) AS Total_Rupiah,
+						FORMAT(SUM(BNI+Mandiri+BCA+BRI+Tunai),0) AS Total_lalin
+					FROM eoj
+					WHERE DATE_FORMAT(Tanggal, '%Y-%m-%d')=CURDATE()) x1;";
+		$query = $dbATP->query($sql)->row();
+
+		echo json_encode($query);
+	}
+
 	public function getDataRevenue()
 	{
 		$dbATP = $this->load->database('atp', TRUE);

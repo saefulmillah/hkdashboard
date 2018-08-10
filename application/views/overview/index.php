@@ -14,15 +14,20 @@
 		<div class="col-md-12 body-dashboard">
 			<div class="col-md-8 chart-container">
 				<div>
-					<div id="progress1">
-						<div class="font-roboto" style="text-align: center;font-size: 1.5rem; font-weight: bold; color:#FF0700; position: absolute; top: 32px; left: 38px; line-height: 1rem; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);">
-							<br><span style="font-size: 0.8rem;">Accident Level</span><br><br>
-							<span id="txtAccidentCurrent">0</span> | <span id="txtAccidentLimit">0</span><br>
+					<div id="progress1" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
+						<div class="font-roboto" style="font-size: 2rem; font-weight: thin; color:#ffb900; position: absolute; top: 61px; left: 39px;">
+							<h2 style="line-height: 1.5rem;"><small><p style="font-size: 1rem;">Daily Revenue</p></small></h2>
+							<dl class="row" style="color: #fff; font-size: 0.7rem;">
+							  <dt class="col-sm-3">lalin</dt>
+							  <dd class="col-sm-9" id="txtLalinGearDaily">0</dd>
+							  <dt class="col-sm-3">Rp</dt>
+							  <dd class="col-sm-9" id="txtRevenueGearDaily">0</dd>
+							</dl>
 						</div>
 					</div>
-					<div id="progress3" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
+					<!-- <div id="progress3" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
 						<div class="font-roboto" style="font-size: 2rem; font-weight: bold; color:#ffb900; position: absolute; top: 136px; left: 89px; line-height: 1rem;">0<span style="font-size: 0.9rem;">%</span><br><span style="font-size: 0.7rem;">Potholes</span></div>
-					</div>
+					</div> -->
 					<div id="progress4" style="background-color: #003366; z-index: -1; text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);" class="rounded-circle">
 						<div class="font-roboto" style="font-size: 2rem; font-weight: thin; color:#3AAACF; position: absolute; top: 61px; left: 39px;">
 							<h2 style="line-height: 1.5rem;"><span id="txtRevenue">0</span><small>%<p style="font-size: 1rem;">Monthly Revenue</p></small></h2>

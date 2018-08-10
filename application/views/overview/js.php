@@ -258,6 +258,7 @@ $(document).ready(function() {
 	    handle_revenue();
 	    handle_revenue_yearly();
 	    handle_method_revenue();
+	    handle_revenue_daily();
     }, 10000);
     // handle_chart();
 });		

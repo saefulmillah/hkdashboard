@@ -2,8 +2,8 @@
 <script type="text/javascript">
  
 var table;
-var handle_grafikTingkatKecelakaan = function () {
-    var url = "<?=site_url('Lalulintas/GrafikTingkatKecelakaan/getDataTingkatKecelakaan')?>";
+var handle_grafikTingkatFatalitas = function () {
+    var url = "<?=site_url('Lalulintas/GrafikTingkatFatalitas/getDataTingkatKecelakaan')?>";
     // Build the chart
     var timestamp_json = new Array();
     var accidentlevel_json = new Array();   
@@ -11,14 +11,14 @@ var handle_grafikTingkatKecelakaan = function () {
                     // Populate series
                     for (i = 0; i < data.length; i++){
                         timestamp_json.push([data[i].tmonth]);
-                        accidentlevel_json.push([Math.round(data[i].accident_level * 100) / 100]);
+                        accidentlevel_json.push([Math.round(data[i].fatality_level * 100) / 100]);
                     }
                  
                     // draw chart
-                    $('#GrafikTingkatKecelakaan').highcharts({
+                    $('#GrafikTingkatFatalitas').highcharts({
                         credits:{enabled:false},
                         title: {
-                            text: 'Grafik Tingkat Kecelakaan'
+                            text: 'Grafik Tingkat Fatalitas'
                         },
                         tooltip: {
                             pointFormat: '{series.name}: <b>{point.y:,.2f}</b>'
@@ -52,7 +52,7 @@ var handle_grafikTingkatKecelakaan = function () {
 }
  
 $(document).ready(function() {
-    handle_grafikTingkatKecelakaan();
+    handle_grafikTingkatFatalitas();
     /*using interval redraw 3 sec*/
     // setInterval(function() {
     //    handle_lalinAntarGerbang();

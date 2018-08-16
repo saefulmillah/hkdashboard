@@ -40,3 +40,20 @@ function usersInfo($info = 'group_id')
 
     return $qGroup[$info];
 }
+
+function categoryKeluhan($id)
+{
+    if ($id==1) {
+        $tipeKeluhan = 'Keluhan';
+    } elseif ($id==2) {
+        $tipeKeluhan = 'Info Lalu Lintas';
+    } elseif ($id==3) {
+        $tipeKeluhan = 'Info Kecelakaan';
+    } elseif ($id==4) {
+        $tipeKeluhan = 'Panic Button';
+    } else {
+        $tipeKeluhan = 'Lain-lain';
+    }
+    
+    return $tipeKeluhan;
+}

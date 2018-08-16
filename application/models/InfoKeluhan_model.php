@@ -2,21 +2,56 @@
 /**
  * 
  */
-class Permission_model extends CI_Model
+
+class InfoKeluhan_model extends CI_Model
 {
-	var $table = 'm_permission';
-	var $column_order = array('name','description','create_by','create_time','update_by','update_time');
-	var $column_search = array('name','description','create_by','create_time','update_by','update_time');
-	var $order = array('id' => 'asc');
+	var $select = 'event_time,category,description,phone,email,status,notes,create_time';
+    var $table = 't_customer_feedback';
+	var $column_order = array('event_time','category','description','phone','email','status','notes');
+	var $column_search = array('event_time','category','description','phone','email','status','notes');
+	var $order = array('id' => 'desc');
 
 	public function __construct()
 	{
 		parent::__construct();
+        $this->dbATP = $this->load->database('atp', TRUE);
 	}
+
+    public function getDataExport($startdate)
+    {
+        $this->db->select($this->select);
+        $this->db->from($this->table);
+        $this->db->where("DATE_FORMAT(Tanggal,'%Y-%m-%d')", $startdate);
+        $this->db->group_by('Gerbang');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 	private function _get_datatables_query()
 	{
-		$this->db->from($this->table);
+		//add custom filter here
+
+        if($this->input->post('tahun')!='-')
+        {
+            $this->db->where("DATE_FORMAT(event_time,'%Y')", $this->input->post('tahun'));
+        }
+
+        if($this->input->post('bulan')!='-')
+        {
+            $this->db->where("DATE_FORMAT(event_time,'%c')", $this->input->post('bulan'));
+        }
+
+        if ($this->input->post('category')!='-') {
+            
+            $this->db->where("category", $this->input->post('category'));
+        }
+
+        if ($this->input->post('info_keluhan')!='') {
+            $this->db->like("description", $this->input->post('info_keluhan'));
+        }
+
+        $this->db->select($this->select);
+        $this->db->from($this->table);
  
         $i = 0;
      
@@ -70,7 +105,9 @@ class Permission_model extends CI_Model
  
     public function count_all()
     {
+        $this->db->select($this->select);
         $this->db->from($this->table);
+        // $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 }

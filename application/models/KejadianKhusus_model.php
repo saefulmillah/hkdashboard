@@ -2,15 +2,13 @@
 /**
  * 
  */
-class RekapitulasiTransaksi_model extends CI_Model
+class KejadianKhusus_model extends CI_Model
 {
-	var $select = 'Gerbang,
-                    SUM(RpBNI+RpMandiri+RpBCA+RpBRI+RpTunai) AS Total_Rupiah,
-                    SUM(BNI+Mandiri+BCA+BRI+Tunai) AS Total_lalin';
-    var $table = 'eoj';
-	var $column_order = array('Gerbang','Total_lalin','Total_Rupiah');
-	var $column_search = array('Gerbang','Total_lalin','Total_Rupiah');
-	var $order = array('Gerbang' => 'ASC');
+	var $select = 'NoGerbang, Gerbang, NoGardu, Shift, Waktu, STATUS, Golongan, Metoda, IdKspt, IdPul';
+    var $table = 'lalin';
+	var $column_order = array('NoGerbang', 'Gerbang', 'NoGardu', 'Shift', 'Waktu', 'STATUS', 'Golongan', 'Metoda', 'IdKspt', 'IdPul');
+	var $column_search = array('NoGerbang', 'Gerbang', 'NoGardu', 'Shift', 'Waktu', 'STATUS', 'Golongan', 'Metoda', 'IdKspt', 'IdPul');
+	var $order = array('id' => 'desc');
 
 	public function __construct()
 	{
@@ -31,18 +29,16 @@ class RekapitulasiTransaksi_model extends CI_Model
 	private function _get_datatables_query()
 	{
 		//add custom filter here
-        if($this->input->post('periodesasi')=='harian')
+        if($this->input->post('start_date'))
         {
-            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d')", $this->input->post('daily'));
-        } else if ($this->input->post('periodesasi')=='bulanan') {
-            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%c')", $this->input->post('monthly'));
+            $this->dbATP->where("DATE_FORMAT(Waktu,'%Y-%m-%d')", $this->input->post('start_date'));
         } else {
-            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d') >= CURDATE()");
+            $this->dbATP->where("DATE_FORMAT(Waktu,'%Y-%m-%d') >= CURDATE()");
         }
 
         $this->dbATP->select($this->select);
         $this->dbATP->from($this->table);
-        $this->dbATP->group_by('Gerbang');
+        $this->dbATP->where("metoda IN ('ALR','LSB','Dinas Operasional','Langganan AU')");
  
         $i = 0;
      
@@ -96,7 +92,11 @@ class RekapitulasiTransaksi_model extends CI_Model
  
     public function count_all()
     {
+        $this->dbATP->select($this->select);
         $this->dbATP->from($this->table);
+        $this->dbATP->where("metoda IN ('ALR','LSB','Dinas Operasional','Langganan AU')");
+        $this->dbATP->where("DATE_FORMAT(Waktu, '%Y-%m-%d')=CURDATE()");
+        // $this->dbATP->from($this->table);
         return $this->dbATP->count_all_results();
     }
 }

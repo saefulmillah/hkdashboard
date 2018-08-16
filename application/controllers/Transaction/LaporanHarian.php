@@ -190,4 +190,44 @@ class LaporanHarian extends CI_Controller
 	      $result = $R->render('excel', $output_file_excel);
 	      force_download($output_file_excel, NULL);		
 	}
+
+	public function getLHR_HPT()
+	{
+		// $month = $this->input->post('month');
+		$dbATP = $this->load->database('atp', TRUE);
+		$data = $dbATP->query("CALL sp_report_lhr_hpt ('SEMPER 1',8)")->result_array();
+
+		$template = 'LHRdanHPT.xls';
+		//set absolute path to directory with template files
+		$templateDir = "./";
+		//set config for report
+		$config = array(
+			'template' => $template,
+			'templateDir' => $templateDir
+		);
+
+		//load template
+		$R = new PHPReport($config);
+		$R->load(
+					array(
+			      		array(
+				              'id' => 'header',
+				              'data' => array('judul' => 'Data Lalu Lintas Harian dan Pendapatan Tol')
+				    	    ),
+				      	array(
+				              'id' => 'detail',
+				              'repeat' => TRUE,
+				              'data' => $data  
+				    	    )
+						)
+		);
+
+		  // define output directoy 
+	      $output_file_dir = "./";
+	      	
+	      $output_file_excel = $output_file_dir  . "LaporanHarian".date('dmYhis');
+	      //download excel sheet with data in /tmp folder
+	      $result = $R->render('excel', $output_file_excel);
+	      force_download($output_file_excel, NULL);	
+	}
 }

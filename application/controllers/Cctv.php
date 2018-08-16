@@ -57,7 +57,7 @@ class Cctv extends CI_Controller
 				FROM (SELECT m_cctv.id, m_cctv.name, t_accident.`event_time`, ((m_cctv.sta_km*1000)+m_cctv.sta_m) AS cctv_sta, ((t_accident.sta_km*1000)+t_accident.sta_m) AS accident_sta
 				FROM m_cctv JOIN t_accident) x1
 				WHERE YEAR(event_time)=2018
-				AND cctv_sta-accident_sta BETWEEN -1000 AND 1000
+				AND cctv_sta-accident_sta BETWEEN -800 AND 800
 				AND TIMESTAMPDIFF(HOUR, event_time, NOW()) BETWEEN 0 AND 3";
 		$query = $this->db->query($sql)->result_array();
 

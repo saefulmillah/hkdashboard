@@ -2,23 +2,41 @@
 /**
  * 
  */
-class SystemConfig_model extends CI_Model
+class PenilaianPelanggan_model extends CI_Model
 {
-	var $select = "id,string_value,int_value,double_value,date_value,description";
-    var $table = 'm_sysconfig';
-	var $column_order = array('id','string_value','int_value','double_value','date_value','description');
-	var $column_search = array('id','string_value','int_value','double_value','date_value','description');
-	var $order = array('id' => 'ASC');
+	var $select = '*';
+    var $table = 't_questionaire_submission';
+	var $column_order = array('create_time','create_by','phone','remarks');
+	var $column_search = array('create_time','create_by','phone','remarks');
+	var $order = array('id' => 'desc');
 
 	public function __construct()
 	{
 		parent::__construct();
+        $this->dbATP = $this->load->database('atp', TRUE);
 	}
+
+    public function getDataExport($startdate)
+    {
+        $this->db->select($this->select);
+        $this->db->from($this->table);
+        $this->db->where("DATE_FORMAT(create_time,'%Y-%m-%d')", $startdate);
+        $this->db->group_by('Gerbang');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 	private function _get_datatables_query()
 	{
-		$this->db->select($this->select);
+		//add custom filter here
+        if($this->input->post('start_date'))
+        {
+            $this->db->where("DATE_FORMAT(create_time,'%Y-%m-%d')", $this->input->post('start_date'));
+        }
+
+        $this->db->select($this->select);
         $this->db->from($this->table);
+        // $this->db->where("metoda IN ('ALR','LSB','Dinas Operasional','Langganan AU')");
  
         $i = 0;
      
@@ -72,7 +90,9 @@ class SystemConfig_model extends CI_Model
  
     public function count_all()
     {
-        $this->_get_datatables_query();
+        $this->db->select($this->select);
+        $this->db->from($this->table);
+        // $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 }

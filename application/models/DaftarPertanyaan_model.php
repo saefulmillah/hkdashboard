@@ -2,53 +2,43 @@
 /**
  * 
  */
-class Senkom_model extends CI_Model
+class DaftarPertanyaan_model extends CI_Model
 {
-	var $select = "  senkom.shift,
-                     senkom.logged_time,
-                     senkom.arrived_time,
-                     senkom.reporter_name,
-                     senkom.reporter_phone,
-                     senkom.reporter_address,
-                     senkom.sta,
-                     senkom.lane,
-                     senkom.vehicle_class,
-                     senkom.vehicle_type,
-                     senkom.vehicle_identification_number,
-                     senkom.vehicle_support,
-                     senkom.tow_code,
-                     senkom.information,
-                     senkom.notes";
-    var $table = 't_senkom_handling as senkom';
-	var $column_order = array('senkom.shift','senkom.logged_time');
-	var $column_search = array('senkom.shift','senkom.logged_time');
-	var $order = array('senkom.logged_time' => 'ASC');
+	var $select = '*';
+    var $table = 'm_questionaire_question';
+	var $column_order = array('question_group', 'question', 'sort_order', 'visible');
+	var $column_search = array('question_group', 'question', 'sort_order', 'visible');
+	var $order = array('id' => 'desc');
 
 	public function __construct()
 	{
 		parent::__construct();
+        $this->dbATP = $this->load->database('atp', TRUE);
 	}
 
-    public function getEnumSet($enumId)
+    public function getDataExport($startdate)
     {
-        $sql = "SELECT detail.`id`, detail.`name`, detail.`sort_order`, detail.`string_value` 
-                FROM m_enum_set AS tipe INNER JOIN m_enum_item AS detail ON tipe.`id`=detail.`enum_set_id`
-                WHERE detail.`enum_set_id`=$enumId";
-        $query = $this->db->query($sql)->result_array();
-
-        return $query;
+        $this->db->select($this->select);
+        $this->db->from($this->table);
+        $this->db->where("DATE_FORMAT(create_time,'%Y-%m-%d')", $startdate);
+        $this->db->group_by('Gerbang');
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
 	private function _get_datatables_query()
 	{
-        //add custom filter here
-        if($this->input->post('start_date'))
-        {
-            $this->db->where("DATE_FORMAT(acd.event_time, '%Y-%m-%d') >=", $this->input->post('start_date'));
-        } 
+		//add custom filter here
+        // if($this->input->post('start_date'))
+        // {
+        //     $this->db->where("DATE_FORMAT(create_time,'%Y-%m-%d')", $this->input->post('start_date'));
+        // } else {
+        //     $this->db->where("DATE_FORMAT(create_time,'%Y-%m-%d') >= CURDATE()");
+        // }
 
-		$this->db->select($this->select);
+        $this->db->select($this->select);
         $this->db->from($this->table);
+        // $this->db->where("metoda IN ('ALR','LSB','Dinas Operasional','Langganan AU')");
  
         $i = 0;
      
@@ -102,7 +92,9 @@ class Senkom_model extends CI_Model
  
     public function count_all()
     {
-        $this->_get_datatables_query();
+        $this->db->select($this->select);
+        $this->db->from($this->table);
+        // $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 }

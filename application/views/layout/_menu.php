@@ -18,7 +18,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-      border: 1px solid transparent;
+      /*border: 1px solid transparent;*/
       /*padding: 2px;*/
       /*font-size: 1rem;*/
       line-height: 1.5;
@@ -33,20 +33,20 @@
     }
     .btn-secondary-floating {
       color: #fff;
-      background-color: #6c757d;
-      border-color: #6c757d;
+      /*background-color: #6c757d;*/
+      /*border-color: #6c757d;*/
       border-radius: 0px;   
     }
 
     .btn-secondary-floating:hover {
       color: #fff;
-      background-color: #5a6268;
-      border-color: #545b62;
+      /*background-color: #5a6268;*/
+      /*border-color: #545b62;*/
     }
 </style>
 <div id="wrapper" class="toggled">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        <div id="sidebar-wrapper" class="bg-dark">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="<?=site_url('/overview')?>">
@@ -89,7 +89,7 @@
           </div>
         </div>
         </nav>
-        <a href="#menu-toggle" class="btn-floating btn-sm-floating btn-secondary" id="menu-toggle"><i class="fa fa-angle-double-right fa-fw"></i></a>
+        <a href="#menu-toggle" class="btn-floating btn-sm-floating btn-dark" id="menu-toggle"><i class="fa fa-angle-double-right fa-fw"></i></a>
         <!-- /#sidebar-wrapper -->
         <div id="page-content-wrapper">
         <!-- Page Content -->

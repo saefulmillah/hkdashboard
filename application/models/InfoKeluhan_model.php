@@ -17,12 +17,30 @@ class InfoKeluhan_model extends CI_Model
         $this->dbATP = $this->load->database('atp', TRUE);
 	}
 
-    public function getDataExport($startdate)
+    public function getDataExport()
     {
+        if($this->input->post('tahun')!='-')
+        {
+            $this->db->where("DATE_FORMAT(event_time,'%Y')", $this->input->post('tahun'));
+        }
+
+        if($this->input->post('bulan')!='-')
+        {
+            $this->db->where("DATE_FORMAT(event_time,'%c')", $this->input->post('bulan'));
+        }
+
+        if ($this->input->post('category')!='-') {
+            
+            $this->db->where("category", $this->input->post('category'));
+        }
+
+        if ($this->input->post('info_keluhan')!='') {
+            $this->db->like("description", $this->input->post('info_keluhan'));
+        }
+
         $this->db->select($this->select);
         $this->db->from($this->table);
-        $this->db->where("DATE_FORMAT(Tanggal,'%Y-%m-%d')", $startdate);
-        $this->db->group_by('Gerbang');
+
         $query = $this->db->get();
         return $query->result_array();
     }

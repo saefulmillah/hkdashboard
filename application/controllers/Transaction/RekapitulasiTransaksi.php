@@ -10,6 +10,7 @@ class RekapitulasiTransaksi extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
+		$this->load->library('PHPReport');
 		$this->load->model('RekapitulasiTransaksi_model', 'RekapitulasiTransaksi');
 		$this->load->model('menus_model', 'menu');
 		$arrGroups = array('admin','StaffOps');
@@ -98,5 +99,44 @@ class RekapitulasiTransaksi extends CI_Controller
 		}
 
 		echo $html;
+	}
+
+	public function getExcel()
+	{
+
+		$data = $this->RekapitulasiTransaksi->getDataExport();
+
+		$template = 'LaporanTransaksi.xls';
+		//set absolute path to directory with template files
+		$templateDir = "./";
+		//set config for report
+		$config = array(
+			'template' => $template,
+			'templateDir' => $templateDir
+		);
+
+		//load template
+		$R = new PHPReport($config);
+		$R->load(
+					array(
+			      		array(
+				              'id' => 'header',
+				              'data' => array('judul' => 'Data Lalu Lintas Harian dan Pendapatan Tol')
+				    	    ),
+				      	array(
+				              'id' => 'detail',
+				              'repeat' => TRUE,
+				              'data' => $data  
+				    	    )
+						)
+		);
+
+		  // define output directoy 
+	      $output_file_dir = "./";
+	      	
+	      $output_file_excel = $output_file_dir  . "LaporanTransaksi".date('dmYhis');
+	      //download excel sheet with data in /tmp folder
+	      $result = $R->render('excel', $output_file_excel);
+	      force_download($output_file_excel, NULL);
 	}
 }

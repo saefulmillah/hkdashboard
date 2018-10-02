@@ -10,6 +10,7 @@ class InfoKeluhan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
+		$this->load->library('PHPReport');
 		$this->load->model('InfoKeluhan_model', 'InfoKeluhan');
 		$this->load->model('menus_model', 'menu');
 		$arrGroups = array('admin','StaffOps');
@@ -112,5 +113,45 @@ class InfoKeluhan extends CI_Controller
 		}
 
 		echo $html;
+	}
+
+	public function getExcel()
+	{
+		$startdate = $this->input->post('start_date');
+		$enddate = $this->input->post('end_date');
+		$data = $this->InfoKeluhan->getDataExport();
+
+		$template = 'penggunajalaninfokeluhan.xls';
+		//set absolute path to directory with template files
+	    $templateDir = "./";
+	    //set config for report
+	     $config = array(
+	       'template' => $template,
+	       'templateDir' => $templateDir
+	    );
+
+	      //load template
+	      $R = new PHPReport($config);
+	      $R->load(
+	      			array(
+			      		array(
+				              'id' => 'header',
+				              'data' => array('startdate' => $startdate, 'enddate' => $enddate)
+				    	    ),
+				      	array(
+				              'id' => 'detail',
+				              'repeat' => TRUE,
+				              'data' => $data  
+				    	    )
+	      				)
+		  );
+
+	      // define output directoy 
+	      $output_file_dir = "./";
+	      	
+	      $output_file_excel = $output_file_dir  . "penggunajalaninfokeluhan_".date('dmYhis').".xlsx";
+	      //download excel sheet with data in /tmp folder
+	      $result = $R->render('excel', $output_file_excel);
+	      force_download($output_file_excel, NULL);
 	}
 }

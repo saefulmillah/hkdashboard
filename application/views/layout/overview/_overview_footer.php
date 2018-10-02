@@ -7,7 +7,7 @@
     <script src="<?=base_url('assets/js/circle-progress.min.js')?>"></script>
     <script src="<?=base_url('assets/js/mdb.min.js')?>"></script>
     <script src="<?=base_url('assets/js/bootstrap.bundle.min.js')?>"></script>
-
+    <script src="<?=base_url('assets/js/highcharts.js')?>"></script>
     <!-- Menu Toggle Script -->
     <script>
     $("#menu-toggle").click(function(e) {

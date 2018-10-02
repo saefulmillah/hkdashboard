@@ -1,18 +1,18 @@
-<form id="myForm">
+<form id="myForm" method="POST">
   <div class="row">
   	<div class="col-md-6">
   	  
   	  <div class="form-group row">
 	    <label for="shift" class="col-sm-4 col-form-label">Shift</label>
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="shift" name="shift" placeholder="Input Shift...">
+	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="shift" name="shift" placeholder="Input Shift..." required="">
 	    </div>
 	  </div>
 
   	  <div class="form-group row">
 	    <label for="logged_time" class="col-sm-4 col-form-label">Informasi diterima</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="logged_time" name="logged_time" placeholder="Date">
+	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="logged_time" name="logged_time" placeholder="Date" required="">
 	    </div>
 	    <div class="col-sm-2">
 	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="logged_time_hour" name="logged_time_hour" placeholder="Hour">
@@ -25,7 +25,7 @@
 	  <div class="form-group row">
 	    <label for="arrived_time" class="col-sm-4 col-form-label">Tiba di TKP</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="arrived_time" name="arrived_time" placeholder="Date">
+	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="arrived_time" name="arrived_time" placeholder="Date" required="">
 	    </div>
 	    <div class="col-sm-2">
 	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="arrived_time_hour" name="arrived_time_hour" placeholder="Hour">
@@ -38,28 +38,28 @@
 	  <div class="form-group row">
 	    <label for="reporter_name" class="col-sm-4 col-form-label">Nama Pelapor</label>
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="reporter_name" name="reporter_name" placeholder="Input Nama Pelapor...">
+	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="reporter_name" name="reporter_name" placeholder="Input Nama Pelapor..." required="">
 	    </div>
 	  </div>
 
 	  <div class="form-group row">
 	    <label for="reporter_phone" class="col-sm-4 col-form-label">HP/Tlp Pelapor</label>
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="reporter_phone" name="reporter_phone" placeholder="HP/Tlp Pelapor...">
+	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="reporter_phone" name="reporter_phone" placeholder="HP/Tlp Pelapor..." required="">
 	    </div>
 	  </div>
 
 	  <div class="form-group row">
 	    <label for="reporter_address" class="col-sm-4 col-form-label">Alamat Pelapor</label>
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="reporter_address" name="reporter_address" placeholder="Alamat Pelapor...">
+	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="reporter_address" name="reporter_address" placeholder="Alamat Pelapor..." required="">
 	    </div>
 	  </div>
 
 	  <div class="form-group row">
 	    <label for="lokasi_sta" class="col-sm-4 col-form-label">Lokasi (STA)</label>
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="lokasi_sta" name="lokasi_sta" placeholder="Input Lokasi (STA)...">
+	      <input type="text" class="form-control form-control-sm" autocomplete="off" id="lokasi_sta" name="lokasi_sta" placeholder="Input Lokasi (STA)..." required="">
 	    </div>
 	  </div>
 	  
@@ -104,7 +104,7 @@
 
 	  <div class="form-group row">
 	    <div class="col-sm-8">
-	      <button type="button" class="btn btn-sm btn-primary" onclick="handle_save()">Save</button>
+	      <button type="submit" class="btn btn-sm btn-primary" onclick="handle_save()">Save</button>
 	      <button type="button" class="btn btn-sm btn-warning" onclick="handle_main()">Back to list</button>
 	    </div>
 	  </div>
@@ -115,7 +115,7 @@
 		<div class="form-group row">
 			<label for="vehicle_identification_number" class="col-sm-4 col-form-label">No. Polisi</label>
 			<div class="col-sm-8">
-			  <input type="text" class="form-control form-control-sm" autocomplete="off" id="vehicle_identification_number" name="vehicle_identification_number" placeholder="Input No Polisi...">
+			  <input type="text" class="form-control form-control-sm" autocomplete="off" id="vehicle_identification_number" name="vehicle_identification_number" placeholder="Input No Polisi..." required="">
 			</div>
 		</div>
 
@@ -133,14 +133,14 @@
 	  	<div class="form-group row">
 			<label for="tow_code" class="col-sm-4 col-form-label">Kode Kendaraan</label>
 			<div class="col-sm-8">
-			  <input type="text" class="form-control form-control-sm" autocomplete="off" id="tow_code" name="tow_code" placeholder="Input Kode Kendaraan...">
+			  <input type="text" class="form-control form-control-sm" autocomplete="off" id="tow_code" name="tow_code" placeholder="Input Kode Kendaraan..." required="">
 			</div>
 		</div>
 
 		<div class="form-group row">
 			<label for="stp_code" class="col-sm-4 col-form-label">No. STP</label>
 			<div class="col-sm-8">
-			  <input type="text" class="form-control form-control-sm" autocomplete="off" id="stp_code" name="stp_code" placeholder="Input No STP...">
+			  <input type="text" class="form-control form-control-sm" autocomplete="off" id="stp_code" name="stp_code" placeholder="Input No STP..." required="">
 			</div>
 		</div>		
 

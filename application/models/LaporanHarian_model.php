@@ -33,11 +33,14 @@ class LaporanHarian_model extends CI_Model
     $this->dbATP = $this->load->database('atp', TRUE);
 	}
 
-  public function getDataExport($startdate)
+  public function getDataExport($startdate, $gerbang)
   {
+      if ($gerbang!='') {
+        $this->dbATP->where("Gerbang", $gerbang);
+      }
         $this->dbATP->select($this->select);
         $this->dbATP->from($this->table);
-        $this->dbATP->where("DATE_FORMAT(`Waktu`,'%Y-%m-%d')", $startdate);
+        $this->dbATP->where("DATE_FORMAT(`Waktu`,'%Y-%c')", $startdate);
         $this->dbATP->group_by('Gerbang');
         $query = $this->dbATP->get();
         return $query->result_array();

@@ -9,6 +9,7 @@ class Accident extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
+		$this->load->library('PHPReport');
 		$this->load->model('Accident_model', 'Accident');
 		$this->load->model('menus_model', 'menu');
 		$arrGroups = array('admin','StaffOps');
@@ -132,5 +133,45 @@ class Accident extends CI_Controller
                 );
         //output to json format
         echo json_encode($output);
+	}
+
+	public function getExcel()
+	{
+		$startdate = $this->input->post('start_date');
+		$enddate = $this->input->post('end_date');
+		$data = $this->Accident->getDataExport($startdate, $enddate);
+
+		$template = 'lalulintasaccident.xls';
+		//set absolute path to directory with template files
+	    $templateDir = "./";
+	    //set config for report
+	     $config = array(
+	       'template' => $template,
+	       'templateDir' => $templateDir
+	    );
+
+	      //load template
+	      $R = new PHPReport($config);
+	      $R->load(
+	      			array(
+			      		array(
+				              'id' => 'header',
+				              'data' => array('startdate' => $startdate, 'enddate' => $enddate)
+				    	    ),
+				      	array(
+				              'id' => 'detail',
+				              'repeat' => TRUE,
+				              'data' => $data  
+				    	    )
+	      				)
+		  );
+
+	      // define output directoy 
+	      $output_file_dir = "./";
+	      	
+	      $output_file_excel = $output_file_dir  . "lalulintasaccident_".date('dmYhis').".xlsx";
+	      //download excel sheet with data in /tmp folder
+	      $result = $R->render('excel', $output_file_excel);
+	      force_download($output_file_excel, NULL);
 	}
 }

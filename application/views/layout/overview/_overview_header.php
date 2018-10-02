@@ -16,19 +16,29 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="<?=base_url('assets/css/simple-sidebar.css')?>" rel="stylesheet">
+    <link href="<?=base_url('assets/css/arc.css')?>" rel="stylesheet">
+    <link href="<?=base_url('assets/css/rating.css')?>" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Exo:300,400,700" rel="stylesheet"> -->
     <style type="text/css">
-        @import url('https://fonts.googleapis.com/css?family=Orbitron');
+        @import url('https://fonts.googleapis.com/css?family=Exo:300,400,700');
+        /*html{
+            width: 100%;
+            height: 100%;
+            border:2px solid #02feff;
+            overflow:hidden;
+            display:block;
+            box-sizing: border-box;
+        }*/
         body {
           /*height: 768px;*/
-          overflow: hidden;
+          /*overflow: hidden;*/
           /*background-position: 0px -350px;*/
-          background-image: url(<?=base_url('assets/images/bg3.jpg')?>);
-          /*background-position: 0px -30px;
-          background-image: url(<?//=base_url('assets/images/bg13.jpg')?>);*/
-          background-size: cover;
+          /*background-image: url(<?//=base_url('assets/images/bg15.jpg')?>);*/
+          background-color: #000;
         }
         .font-roboto {
-          font-family: 'Orbitron', sans-serif;
+          font-family: 'Exo', sans-serif;
         }
         .nav-link[data-toggle].collapsed:after {
             content: "▾";

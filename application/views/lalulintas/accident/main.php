@@ -1,10 +1,12 @@
 <div class="row">
 	<div class="col-md-12">
 		<span class="d-block">
-			<form class="form-inline" action="<?=site_url('Transaction/LaporanHarian/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
+			<form class="form-inline" action="<?=site_url('lalulintas/Accident/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
 			  <div class="form-group mb-2">
 			    <input type="text" name="start_date" id="start_date" class="form-control form-control-sm shadow-sm" placeholder="Start date" autocomplete="off">
 			    &nbsp;
+                <input type="text" name="end_date" id="end_date" class="form-control form-control-sm shadow-sm" placeholder="End date" autocomplete="off">
+                &nbsp;
 			    <button type="button" class="btn btn-sm btn-success" id="search"><i class="fa fa-search"></i> Search</button>
 			    &nbsp;
 			    <button type="submit" class="btn btn-sm btn-success" id="export"><i class="fa fa-file-export"></i> Excel</button> 

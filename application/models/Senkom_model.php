@@ -44,7 +44,11 @@ class Senkom_model extends CI_Model
         //add custom filter here
         if($this->input->post('start_date'))
         {
-            $this->db->where("DATE_FORMAT(acd.event_time, '%Y-%m-%d') >=", $this->input->post('start_date'));
+            $this->db->where("DATE_FORMAT(senkom.arrived_time, '%Y-%m-%d') >=", $this->input->post('start_date'));
+        } 
+        if($this->input->post('end_date'))
+        {
+            $this->db->where("DATE_FORMAT(senkom.arrived_time, '%Y-%m-%d') <=", $this->input->post('end_date'));
         } 
 
 		$this->db->select($this->select);
@@ -104,5 +108,20 @@ class Senkom_model extends CI_Model
     {
         $this->_get_datatables_query();
         return $this->db->count_all_results();
+    }
+
+    public function getDataExport($startdate, $enddate)
+    {
+        if (empty($startdate) || empty($startdate)) {
+            $this->db->select($this->select);
+            $this->db->from($this->table);
+        } else {
+            $this->db->select($this->select);
+            $this->db->from($this->table);
+            $this->db->where("DATE_FORMAT(`arrived_time`,'%Y-%m-%d') >=", $startdate);
+            $this->db->where("DATE_FORMAT(`arrived_time`,'%Y-%m-%d') <=", $enddate);
+        }
+        $query = $this->db->get();
+        return $query->result_array();
     }
 }

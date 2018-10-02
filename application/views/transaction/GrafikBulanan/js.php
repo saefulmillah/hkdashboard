@@ -29,7 +29,7 @@ var handle_grafik24Jam = function (data) {
     var totalRevenue_json = new Array();   
     // Populate series
     for (i = 0; i < data.length; i++){
-        timestamp_json.push([data[i].a]);
+        timestamp_json.push([data[i].bulan]);
         nonCashTraffic_json.push([parseInt(data[i].non_cash_traffic)]);
         cashTraffic_json.push([parseInt(data[i].cash_traffic)]);
         nonCashRevenue_json.push([parseInt(data[i].non_cash_revenue)]);

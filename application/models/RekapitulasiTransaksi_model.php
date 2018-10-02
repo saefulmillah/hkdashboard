@@ -18,12 +18,21 @@ class RekapitulasiTransaksi_model extends CI_Model
         $this->dbATP = $this->load->database('atp', TRUE);
 	}
 
-    public function getDataExport($startdate)
+    public function getDataExport()
     {
+        if($this->input->post('periodesasi')=='harian')
+        {
+            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d')", $this->input->post('start_date'));
+        } else if ($this->input->post('periodesasi')=='bulanan') {
+            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%c')", $this->input->post('tahun').'-'.$this->input->post('bulan'));
+        } else {
+            $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d') >= CURDATE()");
+        }
+
         $this->dbATP->select($this->select);
         $this->dbATP->from($this->table);
-        $this->dbATP->where("DATE_FORMAT(Tanggal,'%Y-%m-%d')", $startdate);
         $this->dbATP->group_by('Gerbang');
+
         $query = $this->dbATP->get();
         return $query->result_array();
     }

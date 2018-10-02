@@ -11,7 +11,7 @@ class Cctv extends CI_Controller
 		parent::__construct();
 		$this->load->library('ion_auth');
 		$this->load->model('menus_model', 'menu');
-		$arrGroups = array('admin','StaffOps');
+		$arrGroups = array('admin','StaffOps','bpjt');
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page

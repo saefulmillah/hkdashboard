@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/parsley.css')?>">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="<?=base_url('assets/js/parsley.min.js')?>"></script>
 <script type="text/javascript">
  
 var table;
@@ -40,14 +42,23 @@ var handle_datatables = function () {
 
 var handle_save = function () {
     var str_url = "<?php echo site_url('Lalulintas/Senkom/save')?>";
-    $.ajax({
-        type: "POST",
-        url: str_url,
-        dataType: "json",
-        data: $("#myForm").serialize(),
-        success: function () {
-            handle_main();
-        }
+    $('#myForm').parsley({
+       errorClass: 'is-invalid text-danger',
+       successClass: 'is-valid', // Comment this option if you don't want the field to become green when valid. Recommended in Google material design to prevent too many hints for user experience. Only report when a field is wrong.
+       errorsWrapper: '<span class="invalid-feedback"></span>',
+       errorTemplate: '<span></span>',
+       trigger: 'change'
+    }).on('form:submit', function() {
+        //return false; // Don't submit form for this demo
+        $.ajax({
+            type: "POST",
+            url: str_url,
+            dataType: "json",
+            data: $("#myForm").serialize(),
+            success: function () {
+                handle_main();
+            }
+        });
     });
 }
 
@@ -68,9 +79,11 @@ var handle_new = function () {
 
 var handle_datepicker = function () {
     $( function() {
-        $( "#logged_time, #arrived_time", ).datepicker({
+        $( "#start_date, #end_date, #logged_time, #arrived_time" ).datepicker({
             altFormat: "yy-mm-dd",
             dateFormat: "yy-mm-dd"
+        }, function (start, end, label) {
+            $('#start_date, #end_date').parsley().validate();
         });
     });
 }

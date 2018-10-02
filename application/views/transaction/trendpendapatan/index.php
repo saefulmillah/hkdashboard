@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<span class="d-block">
-				<form class="form-inline" action="<?=site_url('Transaction/LaporanHarian/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
+				<form class="form-inline" action="<?=site_url('Transaction/TrendPendapatan/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
 					  <div class="form-group mb-2">
 					  	<label>Start</label>
 						&nbsp;

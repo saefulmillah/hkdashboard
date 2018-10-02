@@ -10,6 +10,7 @@ class TrendPendapatan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
+		$this->load->library('PHPReport');
 		$this->load->model('menus_model', 'menu');
 		$arrGroups = array('admin','StaffOps');
 		if (!$this->ion_auth->logged_in())
@@ -114,5 +115,98 @@ class TrendPendapatan extends CI_Controller
 			'series' => $query,
 			);
 		echo json_encode($query);
+	}
+
+	public function getExcel()
+	{
+		$dbATP = $this->load->database('atp', TRUE);
+		$cond1 = '';
+
+		$startdate = $this->input->post('start_date');
+		$enddate = $this->input->post('end_date');
+		$hari = $this->input->post('hari');
+		$gerbang = $this->input->post('gerbang');
+		$gardu = $this->input->post('gardu');
+		$shift = $this->input->post('shift');
+
+
+		if (!empty($this->input->post('start_date')) && !empty($this->input->post('end_date'))) {
+			$cond1 .= "AND Tanggal >= '$startdate' AND tanggal < '$enddate'";
+		} 
+
+		if (!empty($this->input->post('hari'))) {
+			$cond1 .= "AND DAYOFWEEK(tanggal)='$hari'";
+		} 
+
+		if (!empty($this->input->post('gerbang'))) {
+			if ($gerbang<>'-') {
+				$cond1 .= "AND NoGerbang='$gerbang'";
+			}
+		} 
+
+		if (!empty($this->input->post('gardu'))) {
+			if ($gardu<>'-') {
+				$cond1 .= "AND NoGardu='$gardu'";
+			}
+		} 
+
+		if (!empty($this->input->post('shift'))) {
+			if ($shift<>'-') {
+				$cond1 .= "AND Shift='$shift'";
+			}
+		} 
+
+		$sql = "SELECT x1.*
+				FROM
+				(
+						SELECT tanggal,
+					    	SUM(tunai + mandiri + bri + bni + bca ) traffic,
+					    	SUM(tunai) cash_traffic,
+					    	SUM(mandiri + bri + bni + bca ) non_cash_traffic,
+				    		SUM(rptunai) cash_revenue,
+				    		SUM(rpbri + rpbni + rpbca) non_cash_revenue
+						FROM eoj
+			    		WHERE 1 = 1
+			    		%s
+						GROUP BY tanggal
+						ORDER BY tanggal
+			    ) x1";
+		
+		$strSql = sprintf($sql, $cond1);
+
+		$data = $dbATP->query($strSql)->result_array();
+
+		$template = 'transactiontrend.xls';
+		//set absolute path to directory with template files
+	    $templateDir = "./";
+	    //set config for report
+	     $config = array(
+	       'template' => $template,
+	       'templateDir' => $templateDir
+	    );
+
+	      //load template
+	      $R = new PHPReport($config);
+	      $R->load(
+	      			array(
+			      		array(
+				              'id' => 'header',
+				              'data' => array('start_date' => $startdate, 'end_date' => $enddate, 'gerbang' => $gerbang, 'gardu' => $gardu, 'shift' => $shift, 'dayofweek' => $hari, 'export_date' => date('d M Y H:i'))
+				    	    ),
+				      	array(
+				              'id' => 'detail',
+				              'repeat' => TRUE,
+				              'data' => $data  
+				    	    )
+	      				)
+		  );
+
+	      // define output directoy 
+	      $output_file_dir = "./";
+	      	
+	      $output_file_excel = $output_file_dir  . "transactiontrend_".date('dmYhis').".xlsx";
+	      //download excel sheet with data in /tmp folder
+	      $result = $R->render('excel', $output_file_excel);
+	      force_download($output_file_excel, NULL);
 	}
 }

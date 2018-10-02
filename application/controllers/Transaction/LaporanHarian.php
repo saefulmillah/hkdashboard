@@ -195,7 +195,7 @@ class LaporanHarian extends CI_Controller
 	{
 		// $month = $this->input->post('month');
 		$dbATP = $this->load->database('atp', TRUE);
-		$data = $dbATP->query("CALL sp_report_lhr_hpt ('SEMPER 1',8)")->result_array();
+		$data = $dbATP->query("CALL sp_report_lhr_hpt ('SEMPER 1',9)")->result_array();
 
 		$template = 'LHRdanHPT.xls';
 		//set absolute path to directory with template files

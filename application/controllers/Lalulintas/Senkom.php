@@ -9,6 +9,7 @@ class Senkom extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
+		$this->load->library('PHPReport');
 		$this->load->model('Senkom_model', 'Senkom');
 		$this->load->model('menus_model', 'menu');
 		$arrGroups = array('admin','StaffOps');
@@ -100,7 +101,7 @@ class Senkom extends CI_Controller
 	{
 		$list = $this->Senkom->get_datatables();
         $data = array();
-        $no = $_POST['start'];
+        $no = $_POST['start_date'];
         foreach ($list as $listsenkom) {
             $no++;
             $row = array();
@@ -132,5 +133,45 @@ class Senkom extends CI_Controller
                 );
         //output to json format
         echo json_encode($output);
+	}
+
+	public function getExcel()
+	{
+		$startdate = $this->input->post('start_date');
+		$enddate = $this->input->post('end_date');
+		$data = $this->Senkom->getDataExport($startdate, $enddate);
+
+		$template = 'lalulintassenkomhandling.xls';
+		//set absolute path to directory with template files
+	    $templateDir = "./";
+	    //set config for report
+	     $config = array(
+	       'template' => $template,
+	       'templateDir' => $templateDir
+	    );
+
+	      //load template
+	      $R = new PHPReport($config);
+	      $R->load(
+	      			array(
+			      		array(
+				              'id' => 'header',
+				              'data' => array('startdate' => $startdate, 'enddate' => $enddate)
+				    	    ),
+				      	array(
+				              'id' => 'detail',
+				              'repeat' => TRUE,
+				              'data' => $data  
+				    	    )
+	      				)
+		  );
+
+	      // define output directoy 
+	      $output_file_dir = "./";
+	      	
+	      $output_file_excel = $output_file_dir  . "lalulintassenkomhandling_".date('dmYhis').".xlsx";
+	      //download excel sheet with data in /tmp folder
+	      $result = $R->render('excel', $output_file_excel);
+	      force_download($output_file_excel, NULL);
 	}
 }

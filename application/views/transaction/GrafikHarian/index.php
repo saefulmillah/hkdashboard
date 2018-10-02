@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<span class="d-block">
-				<form class="form-inline" action="<?=site_url('Transaction/LaporanHarian/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
+				<form class="form-inline" action="<?=site_url('Transaction/GrafikHarian/getExcel')?>" id="myForm" name="myForm" method="POST" target="_BLANK">
 					<div class="form-group mb-2">
 						Tahun &nbsp;
 						 <select class="form-control form-control-sm" name="tahun">
@@ -26,7 +26,7 @@
 						 echo '<select name="gerbang" class="form-control form-control-sm">';
 						 			echo '<option value="">Semua Gerbang</option>';
 						    foreach ($gerbang as $row) {
-							  		echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+							  		echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
 						     } 
 						 echo '</select>';
 						 ?>
@@ -37,9 +37,9 @@
 					</div>
 				</form>
 			</span>
-			<div class="col-md-12 chart-container" id="GrafikHarian">
-		    </div>
 		</div>		
+		<div class="col-md-12 chart-container" id="GrafikHarian">
+	    </div>
 	</div>
 </div>
 

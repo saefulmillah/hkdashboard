@@ -9,12 +9,12 @@ class Overview extends CI_Controller {
 		$this->load->library('ion_auth');
         $this->load->model('permission_model','permission');
 		$this->load->model('menus_model', 'menu');
-		$arrGroups = array('admin','StaffOps');
+		$arrGroups = array('admin');
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
 			redirect('auth/login', 'refresh');
-		} 
+		}
 		// elseif (!$this->ion_auth->in_group($arrGroups))
 		// {
 		// 	$groups = '';
@@ -32,7 +32,7 @@ class Overview extends CI_Controller {
 	{
 		// layout
 		$data = array(
-			'title' => 'Overview', 
+			'title' => 'Overview',
 			'multilevel' => $this->menu->get_menu_for_level($parent=0),
 			'breadcrumb' => 'Overview'
 		);
@@ -42,7 +42,7 @@ class Overview extends CI_Controller {
 						'style'  => $this->load->view('overview/style', '', TRUE),
 						'menu' => $this->load->view('layout/overview/_overview_menu', $data, TRUE),
 						'index'  => $this->load->view('overview/index', '', TRUE),
-						'js' => $this->load->view('overview/js', '', TRUE), 
+						'js' => $this->load->view('overview/js', '', TRUE),
 						'footer' => $this->load->view('layout/overview/_overview_footer', '', TRUE),
 						);
 
@@ -54,7 +54,7 @@ class Overview extends CI_Controller {
 		$dbATP = $this->load->database('atp', TRUE);
 		$sql = "SELECT (CASE WHEN Total_Rupiah IS NULL THEN 0 ELSE Total_Rupiah END) AS Total_Rupiah,
 				       (CASE WHEN Total_lalin IS NULL THEN 0 ELSE Total_lalin END) AS Total_lalin
-				FROM	
+				FROM
 					(SELECT  FORMAT(SUM(Rupiah),0) AS Total_Rupiah,
 						FORMAT(COUNT(*),0) AS Total_lalin
 					FROM lalin
@@ -80,7 +80,7 @@ class Overview extends CI_Controller {
 		$query = $dbATP->query($sql)->row();
 
 		echo json_encode($query);
-	}	
+	}
 
 	public function getDataMethodRevenue()
 	{
@@ -100,15 +100,15 @@ class Overview extends CI_Controller {
 					ROUND( AVG( t.rating ) / 5 * 100 ) AS percent
 				FROM
 					m_questionaire_question m,
-					t_questionaire_answer t 
+					t_questionaire_answer t
 				WHERE
-					m.visible = '1' 
-					AND m.id = t.question_id 
+					m.visible = '1'
+					AND m.id = t.question_id
 				GROUP BY
 					m.id,
-					m.question 
+					m.question
 				ORDER BY
-					sort_order ASC 
+					sort_order ASC
 					LIMIT 4";
 		$query = $this->db->query($sql)->result_array();
 
@@ -126,38 +126,38 @@ class Overview extends CI_Controller {
 					SUM( CASE WHEN STATUS = 2 THEN 1 ELSE 0 END ) CLOSE,
 					( SELECT int_value FROM m_sysconfig WHERE id = 'customercomplaint.maxlimit' ) maxLimit,
 					ROUND(
-					SUM( CASE WHEN cf.id IS NOT NULL THEN 1 ELSE 0 END ) / ( SELECT int_value FROM m_sysconfig WHERE id = 'customercomplaint.maxlimit' ) * 100 
-					) AS percent 
+					SUM( CASE WHEN cf.id IS NOT NULL THEN 1 ELSE 0 END ) / ( SELECT int_value FROM m_sysconfig WHERE id = 'customercomplaint.maxlimit' ) * 100
+					) AS percent
 				FROM
 					(
 				SELECT
 					2015 + pv1.i tyear,
-					pv2.i tmonth 
+					pv2.i tmonth
 				FROM
 					pivot pv1,
-					pivot pv2 
+					pivot pv2
 				WHERE
-					( pv1.i BETWEEN 0 AND 20 ) 
-					AND ( pv2.i BETWEEN 1 AND 12 ) 
+					( pv1.i BETWEEN 0 AND 20 )
+					AND ( pv2.i BETWEEN 1 AND 12 )
 					) x1
 					LEFT OUTER JOIN t_customer_feedback cf ON (
-					EXTRACT( YEAR FROM cf.event_time ) = x1.tyear 
-					AND EXTRACT( MONTH FROM cf.event_time ) = x1.tmonth 
-					AND cf.category = 1 
-					) 
+					EXTRACT( YEAR FROM cf.event_time ) = x1.tyear
+					AND EXTRACT( MONTH FROM cf.event_time ) = x1.tmonth
+					AND cf.category = 1
+					)
 				WHERE
-					1 = 1 
-					AND x1.tyear = EXTRACT( YEAR FROM event_time ) 
-					AND x1.tmonth = EXTRACT( MONTH FROM event_time ) 
+					1 = 1
+					AND x1.tyear = EXTRACT( YEAR FROM event_time )
+					AND x1.tmonth = EXTRACT( MONTH FROM event_time )
 				GROUP BY
 					x1.tyear,
-					x1.tmonth 
+					x1.tmonth
 				ORDER BY
-					x1.tyear DESC 
+					x1.tyear DESC
 					LIMIT 1";
 		$query = $this->db->query($sql)->row();
 
-		echo json_encode($query);							
+		echo json_encode($query);
 	}
 
 	public function getDataCCTV($isGT=0)
@@ -178,15 +178,15 @@ class Overview extends CI_Controller {
 					lhr,
 					ROUND( accident_level, 2 ) AS accident_level,
 					max_limit,
-					ROUND( ( accident_level / max_limit ) * 100) AS AccidentPersen 
+					ROUND( ( accident_level / max_limit ) * 100) AS AccidentPersen
 				FROM
-					v_accident_level_03 
+					v_accident_level_03
 				WHERE
-					tyear = 2018 
+					tyear = 2018
 					AND tmonth = 8";
 		$query = $this->db->query($sql)->row();
 
-		echo json_encode($query);	
+		echo json_encode($query);
 	}
 
 	public function getRTMS()
